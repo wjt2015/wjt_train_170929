@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<input lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js收发数据</title>
+    <script>
+        function loadXMLDoc() {
+            var xmlHttp = null;
+            if(window.XMLHttpRequest){
+                xmlHttp = new XMLHttpRequest();
+            }
+            xmlHttp.onreadystatechange=function () {
+                if(xmlHttp.readyState == 4 && xmlHttp.status == 200){
+                    var data = xmlHttp.responseText;
+                    data = JSON.parse(data);
+                    console.log(data);
+//                    var cn = data.administratorModelList[0].cn;
+//                    var hireType = data.administratorModelList[1].hireType;
+//                    document.getElementById("myDiv").innerHTML = cn + ";" + hireType;
+                    var content ='';
+
+                    for(var i = 0; i < data.length; i++) {
+                        var admin = '';
+                        admin += 'id:' + data[i]['id'];
+                        admin += ';';
+                        admin += 'cn:' + data[i]['cn'];
+                        admin += '<br/>';
+//                        content += ('hireType:' + data[i]['hireType']);
+//                        content += ' ,';
+//                        content += ('cn:' + data[i]['cn']);
+                        console.log(admin);
+                        content += admin;
+                        console.log(content);
+                    }
+                    document.getElementById("myDiv").innerHTML = content;
+                }
+
+            }
+            xmlHttp.open("POST","/score_tomcat/getAdministratorById",true);
+//            xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            xmlHttp.setRequestHeader("Content-type","application/json;charset=utf-8");
+            xmlHttp.setRequestHeader("Accept","application/json;charset=utf-8");
+            var ids = Array(1,2,3,4,5,7);
+            console.log(ids);
+            var content = '{';
+            for(var i = 0; i < ids.length;){
+                content += i + ':' + i;
+                i++;
+                if(i < ids.length){
+                    content += ',';
+                }
+            }
+            content += '}';
+//            ids = ids.join(",");
+//            console.log(ids);
+            console.log(content);
+
+            var ids = [1,2,5,7];
+            content = JSON.stringify(ids);
+            console.log(content);
+            xmlHttp.send(content);
+//            xmlHttp.send('{"cn":"铁血宰相匹斯麦","hireType":"正式"}');
+//            xmlHttp.send("");
+//            xmlHttp.send("cn");
+//            xmlHttp.send("hireType");
+        }
+        function getUsers() {
+            var xmlHttp = new XMLHttpRequest();
+            console.log(xmlHttp);
+            xmlHttp.onreadystatechange=function () {
+                if(xmlHttp.readyState == 4 && xmlHttp.status == 200){
+                    var data = xmlHttp.responseText;
+                    console.log(data);
+
+                    var jsonData = JSON.parse(data);
+                    for(var i = 0;i < jsonData.length;i++){
+                        var lineData = '';
+                        lineData += jsonData[i]['id'];
+                        lineData += jsonData[i]['cn'];
+                        lineData += jsonData[i]['hireType'];
+                        lineData += jsonData[i]['dep1'];
+                        document.write("<p>" + lineData.big() + "</p><br/>");
+                    }
+                }
+            }
+            var ids = [1,2,5,7,10];
+            var jsonData = JSON.stringify(ids);
+            console.log(jsonData);
+            xmlHttp.open("POST","/score_tomcat/getUsers",true);
+            xmlHttp.setRequestHeader("Content-Type","application/json;charset=utf-8");
+            xmlHttp.setRequestHeader("Accept","application/json;charset=utf-8");
+            xmlHttp.send(jsonData);
+        }
+        function insertUser() {
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange=function () {
+                if(xmlHttp.readyState == 4 && xmlHttp.status == 200){
+                    var adminJsonStr = xmlHttp.responseText;
+                    var adminObj = JSON.parse(adminJsonStr);
+                    console.log("adminObj=" + adminObj);
+                    var adminText = '';
+                    var adminShow = document.getElementById("adminData");
+
+                    adminText += adminObj.id + "<br/>";
+                    adminText += adminObj.rtxId + "<br/>";
+                    adminText += adminObj.cn + "<br/>";
+                    adminText += adminObj.sn + "<br/>";
+                    adminText += adminObj.jobCode + "<br/>";
+                    adminText += adminObj.leader + "<br/>";
+                    adminText += adminObj.hireType + "<br/>";
+                    adminText += adminObj.dep1 + "<br/>";
+                    adminText += adminObj.dep2 + "<br/>";
+                    adminText += adminObj.dep3 + "<br/>";
+                    adminText += adminObj.dep4 + "<br/>";
+                    adminText += adminObj.dep5 + "<br/>";
+                    adminText += adminObj.role + "<br/>";
+                    adminText += adminObj.createTime + "<br/>";
+
+                    adminShow.innerHTML=adminText;
+                }
+            }
+            var idStr = document.getElementById("id").value;
+            var id = parseInt(idStr);
+            var rtxId = document.getElementById("rtxId").value;
+            console.log("rtxId=" + rtxId);
+            var cn = document.getElementById("cn").value;
+            var sn = document.getElementById("sn").value;
+            var jobCode = document.getElementById("jobCode").value;
+            var leader = document.getElementById("leader").value;
+            var hireType = document.getElementById("hireType").value;
+
+            var dep1 = document.getElementById("dep1").value;
+            var dep2 = document.getElementById("dep2").value;
+            var dep3 = document.getElementById("dep3").value;
+            var dep4 = document.getElementById("dep4").value;
+            var dep5 = document.getElementById("dep5").value;
+            var role = document.getElementById("role").value;
+            role = parseInt(role);
+            var createTime = document.getElementById("createTime").value;
+
+            var jsonObj={id:id,rtxId:rtxId,cn:cn,sn:sn,jobCode:jobCode,leader:leader,
+                hireType:hireType,dep1:dep1,dep2:dep2,dep3:dep3,dep4:dep4,dep5:dep5,
+            role:role,createTime:createTime};
+
+            console.log("jsonObj:" + jsonObj);
+            var jsonStr = JSON.stringify(jsonObj);
+            console.log("1;jsonStr:" + jsonStr);
+
+//            xmlHttp.open("POST","/score_tomcat/insertUser",true);
+//            xmlHttp.setRequestHeader("Content-Type","application/json;charset=utf-8");
+//            xmlHttp.setRequestHeader("Accept","application/json;charset=utf-8");
+            xmlHttp.open("POST","/score_tomcat/insertUser",true);
+            xmlHttp.setRequestHeader("Content-Type","application/json;charset=utf-8");
+            xmlHttp.setRequestHeader("Accept","application/json;charset=utf-8");
+//            jsonStr = "{" + "id:" + id + ",cn:" + cn + ",dep1:" + dep1 +"}";
+            console.log("2;jsonStr:" + jsonStr);
+            var sendStr = "'" + jsonStr +"'";
+            console.log("sendStr:" + sendStr);
+            xmlHttp.send(jsonStr);
+        }
+    </script>
+</head>
+<h1>js收发数据练习</h1>
+<div id="myDiv">
+    <h2>使用ajax修改文本内容</h2>
+</div>
+<button type="button" onclick="loadXMLDoc()">根据id查询管理员</button><br/>
+<button type="button" onclick="getUsers()">根据id查询用户</button><br/>
+<p>输入用户数据</p>
+用户id<input type="text" id="id"><br/>
+QTalk<input type="text" id="rtxId"></br>
+用户姓名<input type="text" id="cn"><br/>
+用户工号<input type="text" id="sn"><br/>
+职位类型<input type="text" id="jobCode"><br/>
+直属领导<input type="text" id="leader"><br/>
+用工类型<input type="text" id="hireType"><br/>
+用户的一级部门<input type="text" id="dep1"><br/>
+用户的二级部门<input type="text" id="dep2"><br/>
+用户的三级部门<input type="text" id="dep3"><br/>
+用户的四级部门<input type="text" id="dep4"><br/>
+用户的五级部门<input type="text" id="dep5"><br/>
+角色<input type="text" id="role"><br/>
+创建时间<input type="datetime" id="createTime"><br/>
+<button type="submit" onclick="insertUser()">插入一个用户</button><br/>
+<p>用户数据显示</p>
+<text id = "adminData">admin</text>
+<p>跳转测试</p>
+<a href="/score_tomcat/test2.html">跳转到test2.html</a>
+</body>
+</html>
+

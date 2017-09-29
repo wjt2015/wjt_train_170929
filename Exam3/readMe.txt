@@ -1,0 +1,9 @@
+本程序是springMVC+MyBatis程序，需要配置Tomcat，Tomcat的工作空间是dev_Exam3_tomcat。
+之所以要为每个module单独设置一个工作空间，是因为本project内有多个module都要配置tomcat，
+如果不为每个module单独设置一个工作空间，就容易混淆致错。
+因为spring mvc+mybatis的pom.xml配置复杂，容易出错而难以解决，
+所以将Exam3单独设置为一个模块，而不是dev_training2的子module。
+
+
+
+

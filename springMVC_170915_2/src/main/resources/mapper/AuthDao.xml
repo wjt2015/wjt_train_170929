@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="javaweb.dao.AuthDao">
+
+    <insert id="insertAuthModel">
+        INSERT INTO auth_table(user_name,password,role)
+        VALUES (#{userName},#{password},#{role})
+    </insert>
+
+
+    <delete id="deleteAuthModelById" parameterType="Integer">
+        DELETE FROM auth_table WHERE id = #{id}
+    </delete>
+
+
+    <select id="selectAuthModelById" resultType="javaweb.model.AuthModel">
+        SELECT
+        id as id,
+        user_name as userName,
+        password as password,
+        role as role
+        FROM auth_table
+        WHERE id = #{id}
+    </select>
+
+    <update id="updateAuthModelById">
+        UPDATE auth_table
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userName != null" >
+                user_name = #{userName},
+            </if>
+            <if test="password != null" >
+                password = #{password},
+            </if>
+            <if test="role != null" >
+                role = #{role}
+            </if>
+        </trim>
+        WHERE id = #{id}
+    </update>
+
+</mapper>
+
+
+
+

@@ -1,0 +1,23 @@
+398534	l-scmsearchbuild[1-4].des.cn5	sudo权限	2017-06-28	添加帐号成功
+398494	l-scmduty[1-3].h.cn1	sudo权限	2017-06-28	添加帐号成功
+394485	l-dutyhotsearch[1-7].h.cn5	sudo权限	2017-05-18	添加帐号成功
+394483	l-scmdutyworks[1-3].h.cn6	sudo权限	2017-05-18	添加帐号成功
+384125	l-scmcrm[1-2].des.cn5	工程师权限	2017-01-22	添加帐号成功
+366967	l-scmdata.des.cn5	sudo权限	2016-08-03	添加帐号成功
+341053	l-ctsearch[1-4].des.cn5	工程师权限	2016-02-22	添加帐号成功
+340788	l-scmes[1-6].des.dev.cn0	工程师权限	2016-02-19	添加帐号成功
+318295	l-scmdata.des.cn5	工程师权限	2015-10-26	添加帐号成功
+299724	l-scmnotify[1-2].des.cn5	工程师权限	2015-07-30	添加帐号成功
+276306	l-hmsdbtools2.h.cn6	工程师权限	2015-04-14	添加帐号成功
+272522	l-scmreport[1-3].des.cn5	工程师权限	2015-03-27	添加帐号成功
+272156	l-scmtask[1-2].des.cn6
+
+92927	l-scmmsg1.des.cn6	sudo权限	2014-08-26	添加帐号成功
+92926	l-scmct1.des.cn6	sudo权限	2014-08-26	添加帐号成功
+92925	l-crm2.mobile.des.cn6	sudo权限	2014-08-26	添加帐号成功
+92924	l-crm1.mobile.des.cn6	sudo权限	2014-08-26	添加帐号成功
+92923	l-scmperm2.des.cn6	sudo权限	2014-08-26	添加帐号成功
+92922	l-scmmsg2.des.cn6	sudo权限	2014-08-26	添加帐号成功
+92921	l-scmperm1.des.cn6	sudo权限	2014-08-26	添加帐号成功
+92908	l-crm3.des.cn6  sudo权限	2014-08-26	添加帐号成功
+

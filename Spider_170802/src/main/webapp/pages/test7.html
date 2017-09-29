@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function upperCase(){
+            var frameObj = document.getElementById("frame");
+            var value = frameObj.value;
+            alert("frameObj-value=" + value);
+            frameObj.value = value.toUpperCase();
+        }
+    </script>
+</head>
+<p>请输入您的姓名，然后把焦点移动到字段处</p>
+请输入您的姓名(英文字符)：<input type="text" id = "frame" onblur = "upperCase()">
+</html>

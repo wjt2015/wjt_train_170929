@@ -1,0 +1,6 @@
+美国上一任总统=奥巴马
+最流行的企业及编程语言=Java
+最流程的Web开发框架=Spring MVC
+最流行的数据库访问框架=MyBatis
+世界三大计算机操作系统=Windows,UNIX,Linux
+世界三大主流数据库=Oracle,Sql Server,MySql

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<note xmlns="http://www.w3school.com.cn"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.w3school.com.cn ../xsd/note.xsd" >
+    <to>George</to>
+    <from>John</from>
+    <heading>Remainder</heading>
+    <body>Don't forget the meeting!!</body>
+</note>
+
+
+<!--
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qunar.fresh2017.dao.EmployeePointsDao">
+
+        <select id="getCount" resultType="int">
+                select count(*) from employee_points
+        </select>
+        <select id="queryEmployeePoints" resultType="QueryPointDetailResult">
+                select
+                e.id as id,
+                u.cn as cn,
+                u.rtx_id as rtxId,
+                u.job_code as jobCode,
+                u.leader as leader,
+                u.dep1 as dep1,
+                e.point_item_or_promotion_item as pointItemOrPromotionItem,
+                e.main_content as mainContent,
+                e.project_period as projectPeriod,
+                e.duration as duration,
+                e.location as location,
+                e.date as date,
+                e.person_num as personNum,
+                e.score as score,
+                e.points as points,
+                e.remark as remark,
+                e.operator as operator,
+                e.update_time as updateTime
+                from user u,employee_points e
+                <where>
+                    and e.is_deleted=0 and u.is_deleted=0 and u.id=e.user_id
+                        <if test="rtxId != null and rtxId != ''">
+                                and u.rtx_id=#{rtxId}
+                        </if>
+                        <if test="jobCode != null and jobCode != ''">
+                                and u.job_code=#{jobCode}
+                        </if>
+                        <if test="dep1 != null and dep1 != ''">
+                                and u.dep1=#{dep1}
+                        </if>
+                        <if test="startDate != null and startDate != '' and endDate !=null and endDate != ''">
+                                and e.date BETWEEN #{startDate} and #{endDate}
+                        </if>
+                        <if test="pointItemOrPromotionItem != null and pointItemOrPromotionItem != ''">
+                                and e.point_item_or_promotion_item=#{pointItemOrPromotionItem}
+                        </if>
+                        <if test="mainContent != null and mainContent != ''">
+                                and e.main_content like concat('%',#{mainContent},'%')
+                        </if>
+                </where>
+        </select>
+
+        <delete id="deleteOneEmployeePoints">
+                update employee_points set is_deleted=1 where id =#{id}
+        </delete>
+        <delete id="deleteMultiEmployeePoints">
+                update employee_points set is_deleted=1 where id in
+                    <foreach collection="array" open="(" close=")" separator="," item="id">
+                        #{id}
+                    </foreach>
+        </delete>
+</mapper>

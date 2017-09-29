@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="javaweb.dao.EmployeeListOndutyDao">
+    <insert id="insertEmployeeListOnduty">
+        INSERT INTO employee_onduty_table(onduty_module,qtalk_list,next_idx,step_size,onduty) VALUES
+        (#{ondutyModule},#{qtalkList},#{nextIdx},#{stepSize},#{onduty})
+    </insert>
+
+    <delete id="deleteEmployeeListOndutyById">
+        DELETE FROM employee_onduty_table
+        WHERE id = #{id}
+    </delete>
+
+    <select id="selectEmployeeListOnduty" resultType="javaweb.model.EmployeeListOnduty">
+        SELECT
+        id as id,
+        onduty_module as ondutyModule,
+        qtalk_list as qtalkList,
+        next_idx as nextIdx,
+        step_size as stepSize,
+        onduty as onduty
+        FROM employee_onduty_table
+        LIMIT #{offset},#{rows}
+    </select>
+
+    <select id="selectEmployeeListOndutyById" resultType="javaweb.model.EmployeeListOnduty">
+        SELECT
+        id as id,
+        onduty_module as ondutyModule,
+        qtalk_list as qtalkList,
+        next_idx as nextIdx,
+        step_size as stepSize,
+        onduty as onduty
+        FROM employee_onduty_table
+        WHERE id = #{id}
+    </select>
+
+    <update id="updateEmployeeListOnduty" parameterType="javaweb.model.EmployeeListOnduty">
+        UPDATE employee_onduty_table
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="ondutyModule != null">
+                onduty_module = #{ondutyModule},
+            </if>
+            <if test="qtalkList != null">
+                qtalk_list = #{qtalkList},
+            </if>
+            <if test="nextIdx != null">
+                next_idx = #{nextIdx},
+            </if>
+            <if test="stepSize != null">
+                step_size = #{stepSize},
+            </if>
+            <if test="onduty != null">
+                onduty = #{onduty}
+            </if>
+        </trim>
+        WHERE id=#{id}
+    </update>
+
+    <select id="selectAllOndutyModules" resultType="javaweb.model.OndutyModule">
+        SELECT
+        id as id,
+        onduty_module as ondutyModule,
+        onduty as onduty
+        FROM employee_onduty_table
+        LIMIT #{offset},#{rows}
+    </select>
+
+
+</mapper>
+
+
+
+

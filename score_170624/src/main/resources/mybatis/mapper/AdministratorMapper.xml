@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qunar.fresh2017.dao.AdministratorDao">
+    <insert id="insertAdministrator" parameterType="com.qunar.fresh2017.model.AdministratorModel">
+        <!--<selectKey keyProperty="id" order="AFTER" resultType="int">-->
+            <!--select LAST_INSERT_ID()-->
+        <!--</selectKey>-->
+        INSERT INTO
+        user(
+        rtx_id,
+        cn,
+        sn,
+        job_code,
+        leader,
+        hire_type,
+        dep1,
+        dep2,
+        dep3,
+        dep4,
+        dep5,
+        role
+        ) VALUES
+        (
+        #{rtxId},
+        #{cn},
+        #{sn},
+        #{jobCode},
+        #{leader},
+        #{hireType},
+        #{dep1},
+        #{dep2},
+        #{dep3},
+        #{dep4},
+        #{dep5},
+        #{role}
+        )
+    </insert>
+
+    <resultMap id="AdministratorAnduser" type="com.qunar.fresh2017.model.AdministratorModel">
+        <id column="id" property="id" />
+        <result column="rtx_id" property="rtxId" />
+        <result column="cn" property="cn" />
+        <result column="sn" property="sn" />
+        <result column="job_code" property="jobCode" />
+        <result column="leader" property="leader" />
+        <result column="hire_type" property="hireType" />
+        <result column="dep1" property="dep1" />
+        <result column="dep2" property="dep2" />
+        <result column="dep3" property="dep3" />
+        <result column="dep4" property="dep4" />
+        <result column="dep5" property="dep5" />
+        <result column="role" property="role" />
+        <result column="create_time" property="createTime" />
+    </resultMap>
+    <!--查询全部系统管理员和普通管理员-->
+    <select id="selectSysAndPlainAdministrators" resultType="com.qunar.fresh2017.model.AdministratorModel">
+        SELECT
+        id as id,
+        rtx_id as rtxId,
+        cn as cn,
+        sn as sn,
+        job_code as jobCode,
+        leader as leader,
+        hire_type as hireType,
+        dep1 as dep1,
+        dep2 as dep2,
+        dep3 as dep3,
+        dep4 as dep4,
+        dep5 as dep5,
+        role as role,
+        create_time as createTime
+        FROM user WHERE role IN (1,2) ORDER BY create_time DESC;
+    </select>
+    <!--查询全部普通管理员-->
+    <select id="selectPlainAdministrators" resultType="com.qunar.fresh2017.model.AdministratorModel">
+        SELECT
+        id as id,
+        rtx_id as rtxId,
+        cn as cn,
+        sn as sn,
+        job_code as jobCode,
+        leader as leader,
+        hire_type as hireType,
+        dep1 as dep1,
+        dep2 as dep2,
+        dep3 as dep3,
+        dep4 as dep4,
+        dep5 as dep5,
+        role as role,
+        create_time as createTime
+        FROM user WHERE AND role = 2 ORDER BY create_time DESC;
+    </select>
+    <!--根据管理员的rtx_id查询Administrator-->
+    <select id="selectAdministratorByRtxId" resultType="com.qunar.fresh2017.model.AdministratorModel">
+        SELECT
+        id as id,
+        rtx_id as rtxId,
+        cn as cn,
+        sn as sn,
+        job_code as jobCode,
+        leader as leader,
+        hire_type as hireType,
+        dep1 as dep1,
+        dep2 as dep2,
+        dep3 as dep3,
+        dep4 as dep4,
+        dep5 as dep5,
+        role as role,
+        create_time as createTime
+        FROM user WHERE rtx_id = #{rtxId}
+    </select>
+    <!--根据管理员的rtx_id查询Administrator-->
+    <select id="selectAdministratorById" resultType="com.qunar.fresh2017.model.AdministratorModel">
+        SELECT
+        id as id,
+        rtx_id as rtxId,
+        cn as cn,
+        sn as sn,
+        job_code as jobCode,
+        leader as leader,
+        hire_type as hireType,
+        dep1 as dep1,
+        dep2 as dep2,
+        dep3 as dep3,
+        dep4 as dep4,
+        dep5 as dep5,
+        role as role,
+        create_time as createTime
+        FROM user WHERE id = #{id}
+    </select>
+    <!--删除某些用户-->
+    <delete id="deleteAdministratorById">
+        DELETE FROM user
+        WHERE id=#{id}
+    </delete>
+    <!--根据id更新user表内每一个记录的全部成员-->
+    <update id="updateAdministratorById" parameterType="com.qunar.fresh2017.model.AdministratorModel">
+        UPDATE user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="rtxId != null">
+                rtx_id = #{rtxId},
+            </if>
+            <if test="cn != null">
+                cn=#{cn},
+            </if>
+            <if test="sn != null">
+                sn=#{sn},
+            </if>
+            <if test="jobCode != null">
+                job_code=#{jobCode},
+            </if>
+            <if test="leader != null">
+                leader=#{leader},
+            </if>
+            <if test="hireType != null">
+                hire_type=#{hireType},
+            </if>
+            <if test="dep1 != null">
+                dep1=#{dep1},
+            </if>
+            <if test="dep2 != null">
+                dep2=#{dep2},
+            </if>
+            <if test="dep3 != null">
+                dep3=#{dep3},
+            </if>
+            <if test="dep4 != null">
+                dep4=#{dep4},
+            </if>
+            <if test="dep5 != null">
+                dep5=#{dep5},
+            </if>
+            <if test="role != null">
+                role=#{role},
+            </if>
+        </trim>
+        <trim prefix="WHERE">
+              <if test="id != null">
+                  id=#{id}
+              </if>
+        </trim>
+    </update>
+
+</mapper>
+
+
+
+
+
+
+

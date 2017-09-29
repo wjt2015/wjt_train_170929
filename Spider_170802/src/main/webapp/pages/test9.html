@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script>
+    function changeImage() {
+        var imageObj = document.getElementById("myimage");
+        if(imageObj.src.match("bulbon")){
+            imageObj.src = "eg_bulboff.gif";
+        }
+        else{
+            imageObj.src = "eg_bulbon.gif";
+        }
+    }
+</script>
+
+<img id="myimage" onclick="changeImage()" src="eg_bulboff.gif">
+
+<p>点击灯泡来点亮或熄灭这盏灯</p>
+
+</body>
+</html>
+

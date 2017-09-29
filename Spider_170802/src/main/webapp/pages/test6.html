@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function showMsg()
+        {
+            alert("您已改变浏览器窗口的尺寸！");
+        }
+        function unloadMsg() {
+            alert("function unloadMsg()");
+        }
+    </script>
+</head>
+
+<body onresize="showMsg()" onunload="unloadMsg()">
+<a href="test1.html">test1</a>
+<p>请试着调整浏览器窗口的大小。</p>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="wjt.mapper.TextDiffMapper">
+    <insert id="insertTextDiff" parameterType="wjt.model.TextDiff">
+        INSERT INTO text_diff_table(date,src_text,target_text,text_diff) VALUES
+        (#{date},#{srcText},#{targetText},#{diffText})
+    </insert>
+    <update id="updateTextDiffByDate" >
+        UPDATE text_diff_table
+        SET
+        date=#{date},
+        src_text=#{srcText},
+        target_text=#{targetText},
+        text_diff=#{diffText}
+        WHERE date=#{date2}
+    </update>
+    <select id="selectTextDiffById" resultMap="textDiffMap">
+        SELECT * FROM text_diff_table
+        WHERE id=#{id}
+    </select>
+    <resultMap id="textDiffMap" type="wjt.model.TextDiff">
+        <id column="id" property="id" />
+        <result column="date" property="date" />
+        <result column="src_text" property="srcText" />
+        <result column="target_text" property="targetText" />
+        <result column="text_diff" property="diffText" />
+    </resultMap>
+</mapper>
+
+

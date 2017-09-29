@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js收发数据(数组);test5.html</title>
+    <script>
+        var ids = new Array();
+
+        function addAdminId() {
+            var id = document.getElementById("AdminId").value;
+            console.log("id=" + id);
+            if(id == null){
+                alert("id==" + id);
+                return;
+            }
+            ids.push(id);
+            console.log("ids=" + ids);
+        }
+        function getAdministratorByIds() {
+            var xmlHttp = null;
+            if(window.XMLHttpRequest){
+                xmlHttp = new XMLHttpRequest();
+            }
+            xmlHttp.onreadystatechange=function () {
+                if(xmlHttp.readyState == 4 && xmlHttp.status == 200){
+                    var data = xmlHttp.responseText;
+                    console.log("data=" + data);
+                    if(data == null){
+                        alert("data=" + data);
+                        return;
+                    }
+                    var adminArr = JSON.parse(data);
+                    console.log("adminArr=" + adminArr);
+                    var content ='';
+                    for(var i = 0;i < adminArr.length;i++){
+                        var adminObj = adminArr[i];
+                        var createTime = new Date();
+                        console.log("adminObj.createTime:" + adminObj.createTime);
+                        createTime = createTime.setSeconds(adminObj.createTime);
+                        console.log("createTime:" + createTime);
+//                        console.log("createTime_str:" + createTime.toDateString);
+                        content += (adminObj.id + ';' + adminObj.cn + ';' + adminObj.sn + ';' + adminObj.dep1 + ';' + createTime+ '<br/>');
+                    }
+                    console.log("content=" + content);
+                    document.getElementById("myDiv").innerHTML = content;
+                }
+            }
+            xmlHttp.open("POST","/score_tomcat/getAdministratorByIds",true);
+            xmlHttp.setRequestHeader("Content-type","application/json;charset=utf-8");
+            xmlHttp.setRequestHeader("Accept","application/json;charset=utf-8");
+
+            var jsonObj =ids;
+            console.log("jsonObj=" + jsonObj);
+            var jsonStr = JSON.stringify(jsonObj);
+            console.log("jsonStr=" + jsonStr);
+            xmlHttp.send(jsonStr);
+            ids = new Array();
+        }
+    </script>
+</head>
+<body>
+<h1>js收发数据练习(数组);test4</h1>
+<div id="myDiv">
+    <h2>getAdministratorById</h2>
+</div>
+用户id<input type="number" name="AdminId" id="AdminId"><button type="button"  id="AdminBtnId" onclick="addAdminId()">确认</button><br/>
+<button type="submit" onclick="getAdministratorByIds()">查询提交</button><br/>
+</body>
+</html>
+

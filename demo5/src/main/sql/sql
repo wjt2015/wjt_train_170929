@@ -1,0 +1,34 @@
+--创建数据库bar
+CREATE DATABASE bar;
+USE bar;
+--bar数据库中的建表语句
+CREATE TABLE `cat` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `name` varchar(25) NOT NULL DEFAULT '' COMMENT '名称',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='bar库中的cat表';
+
+-- ----------------------------
+-- Records of cat
+-- ----------------------------
+INSERT INTO `cat` VALUES ('1', 'kitty');
+INSERT INTO cat(name) VALUES('cat1'),('cat2');
+
+
+--创建数据库foo
+CREATE DATABASE foo;
+USE foo;
+--foo数据库中的建表语句
+CREATE TABLE `dog` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `name` varchar(25) NOT NULL DEFAULT '' COMMENT '名称',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='foo库中的dog表';
+
+-- ----------------------------
+-- Records of dog
+-- ----------------------------
+INSERT INTO `dog` VALUES ('1', 'dog');
+INSERT INTO dog(name) VALUES('dog1'),('精灵狗'),('澳洲牧羊犬');
+
+

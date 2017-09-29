@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qunar.crm.dao.EmployeeListOnDutyDao">
+    <insert id="insertEmployeeListOnDuty" parameterType="com.qunar.crm.model.EmployeeListOnDuty">
+        INSERT INTO employee_onduty_table(onduty_module,qtalk_list,idx) VALUES
+        (#{onDutyModule},#{qtalkList},#{idx})
+    </insert>
+
+    <delete id="deleteEmployeeListOnDutyByOnDutyModule">
+        DELETE FROM employee_onduty_table
+        WHERE onduty_module = #{onDutyModule}
+    </delete>
+
+    <select id="selectEmployeeListOnDuty" resultType="com.qunar.crm.model.EmployeeListOnDuty">
+        SELECT
+        id as id,
+        onduty_module as onDutyModule,
+        qtalk_list as qtalkList,
+        idx as idx
+        FROM employee_onduty_table
+    </select>
+
+    <select id="selectEmployeeListOnDutyByOnDutyModule" resultType="com.qunar.crm.model.EmployeeListOnDuty">
+        SELECT
+        id as id,
+        onduty_module as onDutyModule,
+        qtalk_list as qtalkList,
+        idx as idx
+        FROM employee_onduty_table
+        WHERE onduty_module = #{onDutyModule}
+    </select>
+
+    <update id="updateEmployeeListOnDuty" parameterType="com.qunar.crm.model.EmployeeListOnDuty">
+        UPDATE employee_onduty_table
+        SET
+        qtalk_list = #{qtalkList},
+        idx = #{idx}
+        WHERE onduty_module = #{onDutyModule}
+    </update>
+</mapper>
+
+
+
+

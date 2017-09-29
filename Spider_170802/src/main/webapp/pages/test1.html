@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Hello World!</p>
+<p>DOM 很有用！</p>
+<p>本例演示 <b>length</b> 属性。</p>
+
+<h1 id="h1ID" onmouseover="getComment()">---</h1>
+
+<div id="divID" >
+    div
+</div>
+
+<script>
+    function getComment(){
+        x=document.getElementsByTagName("p");
+        alert("x="+ x);
+        var divObj = document.getElementById("divID");
+        var n = x.length;
+        var text="";
+        for (var i=0;i < n;i++)
+        {
+            text += x[i].innerHTML + "<br/>";
+        }
+        divObj.innerHTML = text;
+        divObj.write("finish!!");
+    }
+</script>
+</body>
+</html>
+

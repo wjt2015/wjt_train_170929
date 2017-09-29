@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function loadXMLDoc() {
+            var xmlHttp = null;
+            if(window.XMLHttpRequest){
+                xmlHttp = new XMLHttpRequest();
+            }
+            xmlHttp.onreadystatechange=function () {
+                if(xmlHttp.readyState == 4 && xmlHttp.status == 200){
+                    var data = xmlHttp.responseText;
+                    data = JSON.parse(data);
+                    document.getElementById("myDiv").innerHTML = data.hireType;
+                }
+
+            }
+            xmlHttp.open("GET","/score_tomcat/info",true);
+            xmlHttp.send();
+        }
+    </script>
+</head>
+<body>
+<div id="myDiv">
+    <h2>使用ajax修改文本内容</h2>
+</div>
+<button type="button" onclick="loadXMLDoc()">会被更新的内容</button>
+</body>
+</html>

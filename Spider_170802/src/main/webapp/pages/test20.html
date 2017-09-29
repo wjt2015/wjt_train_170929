@@ -1,0 +1,27 @@
+<html>
+<body>
+<script>
+function onchange() {
+    var x,i,n = 20;
+    var mycars = new Array()
+    mycars[0] = "Saab"
+    mycars[1] = "Volvo"
+    mycars[2] = "BMW"
+
+    for(i = 3;i < n;i++){
+        mycars[i] = i + 20;
+    }
+    console.log("n=" + mycars.length);
+
+    for (x in mycars)
+    {
+        document.write("x = " + x + ";v=" + mycars[x] + "<br />");
+    }
+}
+</script>
+<textarea id="textareaId" maxlength="10000" rows="10" cols="100" onclick="onchange()" />
+</body>
+</html>
+
+
+

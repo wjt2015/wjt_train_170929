@@ -1,0 +1,8 @@
+abc=123
+345=9540
+ksdlfdsf=2342
+546=54ew
+driverClassName=com.mysql.jdbc.Driver
+url=jdbc:mysql://localhost:3306/employee_db?
+password=linux2014
+user=root

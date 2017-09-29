@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cookie练习</title>
+    <script>
+        function getCookie(cname) {
+            var name = cname + "=";
+            var istart = document.cookie.indexOf(name);
+            if(istart < 0){
+                return null;
+            }
+            istart += name.length;
+            var iend = document.cookie.indexOf(";",istart);
+            var retStr = null;
+            if(iend < 0){
+                retStr = document.cookie.substring(istart);
+            }
+            else{
+                var length = iend - istart + 1;
+                retStr = document.cookie.substr(istart,length);
+            }
+            return retStr;
+        }
+        function setCookie(cname,cvalue,exdays) {
+            var date = new Date();
+            var expires_seconds =date.getTime() + exdays * 24 * 3600;
+            date.setTime(expires_seconds);
+            var expires = "expires=" + date.toGMTString();
+            document.cookie = cname + "=" + cvalue + ";" + expires;
+        }
+        function checkCookie(cname) {
+            var cvalue = getCookie(cname);
+            if(cvalue != null){
+                alert("welcome again:" + cname);
+            }
+            else {
+                cvalue = prompt("Please input your name:","");
+                if(cvalue != null && cvalue != ""){
+                    setCookie("username",cvalue,1);
+                }
+            }
+        }
+        function showCookie() {
+            alert("showCookie()");
+            document.getElementById("divID").innerHTML= document.cookie;
+        }
+    </script>
+</head>
+<body onload="checkCookie('username')">
+<div id="divID" onmouseover="showCookie()" style="color: blueviolet">
+    显示cookie
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

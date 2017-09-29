@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js收发数据</title>
+    <script>
+        function loadXMLDoc() {
+            var xmlHttp = null;
+            if(window.XMLHttpRequest){
+                xmlHttp = new XMLHttpRequest();
+            }
+            xmlHttp.onreadystatechange=function () {
+                if(xmlHttp.readyState == 4 && xmlHttp.status == 200){
+                    var data = xmlHttp.responseText;
+                    data = JSON.parse(data);
+                    console.log(data);
+//                    var cn = data.administratorModelList[0].cn;
+//                    var hireType = data.administratorModelList[1].hireType;
+//                    document.getElementById("myDiv").innerHTML = cn + ";" + hireType;
+                    var content ='';
+
+                    for(var i = 0; i < data.length; i++) {
+                        content += ('hireType:' + data[i]['hireType']);
+                        content += ' ,';
+                        content += ('cn:' + data[i]['cn']);
+                        console.log(content);
+                    }
+                    document.getElementById("myDiv").innerHTML = content;
+                }
+            }
+            xmlHttp.open("POST","/score_tomcat/getNAdministrators",true);
+//            xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            xmlHttp.setRequestHeader("Content-type","application/json;charset=utf-8");
+            xmlHttp.setRequestHeader("Accept","application/json;charset=utf-8");
+            xmlHttp.send('{"cn":"铁血宰相匹斯麦","hireType":"正式"}');
+        }
+    </script>
+</head>
+<body>
+<h1>js收发数据练习</h1>
+<div id="myDiv">
+    <h2>使用ajax修改文本内容</h2>
+</div>
+<button type="button" onclick="loadXMLDoc()">会被更新的内容</button>
+</body>
+</html>

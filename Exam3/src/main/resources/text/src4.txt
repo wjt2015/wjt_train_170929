@@ -1,0 +1,4 @@
+缓存系统=redis
+编程语言=Python
+开发平台=Anaconda
+计算机=Dell

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js收发数据;test4.html</title>
+    <script>
+        function getAdministratorById() {
+            var xmlHttp = null;
+            if(window.XMLHttpRequest){
+                xmlHttp = new XMLHttpRequest();
+            }
+            xmlHttp.onreadystatechange=function () {
+                if(xmlHttp.readyState == 4 && xmlHttp.status == 200){
+                    var data = xmlHttp.responseText;
+                    if(data == null){
+                        alert("data=" + data);
+                        return;
+                    }
+                    data = JSON.parse(data);
+                    console.log(data);
+                    var content ='';
+                    content += ('id:' + data['id'] + '<br/>');
+                    content += ('hireType:' + data['hireType'] + '<br/>');
+                    content += ('cn:' + data['cn'] + '<br/>');
+                    console.log(content);
+                    document.getElementById("myDiv").innerHTML = content;
+                }
+
+            }
+            xmlHttp.open("POST","/score_tomcat/getAdministratorById",true);
+//            xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            xmlHttp.setRequestHeader("Content-type","application/json;charset=utf-8");
+            xmlHttp.setRequestHeader("Accept","application/json;charset=utf-8");
+            var id = document.getElementById("AdminId").value;
+            console.log("id=" + id);
+            if(id == null){
+                alert("id==" + id);
+                return;
+            }
+            var jsonObj =new Number(id);
+            console.log("jsonObj=" + jsonObj);
+            var jsonStr = JSON.stringify(jsonObj);
+            console.log("jsonStr=" + jsonStr);
+            xmlHttp.send(jsonStr);
+        }
+    </script>
+</head>
+<body>
+<h1>js收发数据练习(Integer);test4</h1>
+<div id="myDiv">
+    <h2>getAdministratorById</h2>
+</div>
+用户id<input type="number" name="AdminId" id="AdminId"><br/>
+<button type="button" onclick="getAdministratorById()">getAdministratorById</button><br/>
+</body>
+</html>

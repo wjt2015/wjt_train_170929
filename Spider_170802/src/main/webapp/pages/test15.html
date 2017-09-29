@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<script>
+    function getSelectedOption(){
+        var selectObj = document.getElementById("selectId");
+        var divObj = document.getElementById("divId");
+        divObj.innerHTML = selectObj.selectedIndex + ";" + selectObj.options[selectObj.selectedIndex].innerHTML;
+    }
+
+    function setAllOptions(){
+        var selectObj = document.getElementById("selectId");
+        var index = 0,text = "option";
+        for(index = 0;index < selectObj.childElementCount;index++){
+            selectObj.options[index].value = index;
+            selectObj.options[index].innerHTML = text + "--" + index;
+        }
+    }
+</script>
+<body onload="setAllOptions()">
+
+<select id="selectId">
+    <option>Volvo</option>
+    <option selected="selected">Saab</option>
+    <option>Mercedes</option>
+    <option>Audi</option>
+</select>
+
+<input type="submit" value="submit" onclick="getSelectedOption()">
+
+<div id="divId">
+
+</div>
+</body>
+</html>

@@ -1,0 +1,6 @@
+@startuml
+A-->B:IP租约请求
+B-->A:IP租约回复
+A-->B:IP租约选择
+B-->A:IP租约确认
+@enduml

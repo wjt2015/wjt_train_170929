@@ -1,0 +1,67 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:spring/spring-mybatis.xml,classpath:aop/aop.xml</param-value>
+  </context-param>
+
+  <filter>
+    <filter-name>encodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>utf8</param-value>
+    </init-param>
+    <init-param>
+      <param-name>forceEncoding</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>encodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
+  <servlet>
+    <servlet-name>springMVC170623_servlet</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <!--<init-param>-->
+      <!--<param-name>contextConfigLocation</param-name>-->
+      <!--<param-value>classpath:spring/spring-mvc.xml</param-value>-->
+    <!--</init-param>-->
+    <!--<load-on-startup>1</load-on-startup>-->
+    <!--<multipart-config>-->
+      <!--&lt;!&ndash; //临时路径&ndash;&gt;-->
+      <!--<location>/Users/lfz</location>-->
+      <!--&lt;!&ndash; 单个文件最大&ndash;&gt;-->
+      <!--<max-file-size>1024</max-file-size>-->
+      <!--&lt;!&ndash; 所有文件最大&ndash;&gt;-->
+      <!--<max-request-size>2048</max-request-size>-->
+      <!--&lt;!&ndash; 文件大小超过这个，会写入临时路径，默认是0，也就是所有上传文件都放到临时路径&ndash;&gt;-->
+      <!--<file-size-threshold>2048</file-size-threshold>-->
+    <!--</multipart-config>-->
+
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>springMVC170623_servlet</servlet-name>
+    <url-pattern>*.html</url-pattern>
+  </servlet-mapping>
+
+
+
+</web-app>
+
+
+
+

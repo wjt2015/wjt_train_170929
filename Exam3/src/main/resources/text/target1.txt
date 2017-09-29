@@ -1,0 +1,6 @@
+abcd=123
+w345=9540
+ksdlfdsf=2342
+546=54ew
+name=root
+pwd=mysql2017

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+<div class="well">
+
+    <h5>值班模块</h5>
+    <div class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label" for="ondutyModuleId">选择值班模块</label>
+            <div class="controls">
+                <select class="form-control" id="ondutyModuleId" onchange="getOndutyInfoOnTheModule()">
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <h5>值班员工列表</h5>
+    <div class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label" for="qtalkListId">值班员工列表</label>
+            <div class="controls">
+                <textarea id="qtalkListId" maxlength="10000" rows="5" cols="80"/>
+                <!--<input type="text" id="qtalkListId" maxlength="10000"/>-->
+            </div>
+        </div>
+    </div>
+
+    <h5>每天一个模块的值班人数</h5>
+    <div class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label">值班人数</label>
+            <div class="controls">
+                <input type="number" id="stepSizeId" min="1"/>
+            </div>
+        </div>
+    </div>
+
+    <h5>值班员工索引</h5>
+    <div class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label">下一个值班员工索引</label>
+            <div class="controls">
+                <input type="number" id="nextIdxId" min="0"/>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="control-group">
+    <div class="controls" align="center">
+        <button type="button" class="btn" onclick="update()">确认</button>
+        <button type="button" class="btn" onclick="getAllModules()">取消</button>
+    </div>
+</div>
+
+</div>
+
+
+</body>
+</html>
+
+

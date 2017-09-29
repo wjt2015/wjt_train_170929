@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<body onclick="getVideoTracks()" type="button">
+<br />
+<br />
+
+<video id = "video1" controls="controls">
+    <source src="mov.mp4" type="video/mp4">
+    <source src="mov.ogg" type="video/ogg">
+    Your browser doesn't support video.
+</video>
+<script>
+    var myVid = document.getElementById("video1");
+    function getVideoTracks() {
+        alert(myVid.videoTracks.length);
+    }
+</script>
+
+</body>
+</html>
+

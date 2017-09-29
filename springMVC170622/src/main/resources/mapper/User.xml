@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="wjt.mapper.UserMapper">
+    <!--<resultMap id="hotelInfoResultMap" type="HotelInfoModel">-->
+        <!--<id column="id" property="id"/>-->
+        <!--<result column="hotel_name" property="hotelName"/>-->
+        <!--<result column="city" property="city"/>-->
+        <!--<result column="price" property="price"/>-->
+        <!--<result column="level" property="level"/>-->
+    <!--</resultMap>-->
+    <insert id="insertUser" >
+        INSERT INTO user_table(name,password,nickname) VALUES
+        (#{user.name},#{user.password},#{user.nickName})
+    </insert>
+</mapper>

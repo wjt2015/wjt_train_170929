@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qunar.fresh2017.mapper.TextDiffMapper">
+
+    <!--查看全部的对比记录-->
+    <select id="selectTextDiff" resultMap="selectResultMap">
+        select * from text_diff_table
+    </select>
+
+    <!--查看最近的若干个对比记录-->
+    <select id="selectTextDiffLatest" resultMap="selectResultMap">
+        select * from text_diff_table order by date desc limit #{n}
+    </select>
+
+    <!--查看最近的记录，按时间逆序排序，从startIndex开始，记录个数为n-->
+    <select id="selectTextDiffRangeByDate" resultMap="selectResultMap" >
+        select * from text_diff_table order by date desc limit #{n} offset #{startIndex}
+    </select>
+
+    <resultMap id="selectResultMap" type="com.qunar.fresh2017.model.TextDiff">
+        <result column="id" property="id" />
+        <result column="date" property="date" />
+        <result column="src_text" property="srcText" />
+        <result column="target_text" property="targetText" />
+        <result column="text_diff" property="diffText" />
+    </resultMap>
+
+    <!--将对比结果插入数据表text_diff_table-->
+    <insert id="insertTextDiff" parameterType="com.qunar.fresh2017.model.TextDiff">
+        insert into text_diff_table(date,src_text,target_text,text_diff)
+        VALUES (#{date},#{srcText},#{targetText},#{diffText})
+    </insert>
+    <!--根据id删除文件对比记录-->
+    <delete id="deleteTextDiffById">
+        DELETE FROM text_diff_table WHERE id=#{id}
+    </delete>
+
+</mapper>

@@ -1,0 +1,15 @@
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="STDOUT"/>
+    </root>
+    <!-- 打印出sql语句见debug输出的内容, name：对应sql mapper文件的namespace的接口所在的包-->
+    <logger name="wjt.mapper" level="DEBUG"/>
+</configuration>
+
+

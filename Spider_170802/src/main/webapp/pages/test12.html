@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试放大与缩小</title>
+</head>
+<body>
+<script>
+    function changeSize() {
+        var divObj = document.getElementById("divID");
+        document.getElementById("beforeSize").innerHTML = "beforeSize;width=" + divObj.style.width + ";height=" + divObj.style.height;
+        divObj.style.width = 2 * divObj.style.width;
+        divObj.style.height = 2 * divObj.style.height;
+        document.getElementById("afterSize").innerHTML = "afterSize;width=" + divObj.style.width + ";height=" + divObj.style.height;
+    }
+</script>
+<div id="divID" onmouseover="changeSize()" style="color: red;width:300px;height:200px">
+    <h1>这是一个div;h1</h1>
+    <p>div,可定义文档中的分区或节</p>
+</div>
+
+<div id="divObj2" style="color: chartreuse">
+    <div id="beforeSize">
+
+    </div>
+    <div id="afterSize">
+
+    </div>
+</div>
+<a href="https://zhidao.baidu.com/question/589365277.html" accesskey="q">
+    js点击弹出提示层2秒钟之后自动消失
+</a>
+</body>
+</html>
+
