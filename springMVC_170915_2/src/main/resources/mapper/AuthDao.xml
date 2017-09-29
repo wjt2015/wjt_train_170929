@@ -15,6 +15,13 @@
         DELETE FROM auth_table WHERE id = #{id}
     </delete>
 
+    <select id="selectAuthModelByNamePasswordRole">
+        SELECT id
+        FROM auth_table
+        WHERE user_name = #{userName}
+        AND password = #{password}
+        AND role = #{role}
+    </select>
 
     <select id="selectAuthModelById" resultType="javaweb.model.AuthModel">
         SELECT

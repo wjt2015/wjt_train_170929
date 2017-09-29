@@ -7,6 +7,8 @@ import javaweb.model.AuthModel;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @author jintao.wang  Date: 17-9-28 Time: 下午1:41
  */
@@ -18,6 +20,8 @@ public interface AuthDao {
     int deleteAuthModelById(@Param("id") Integer id);
 
     AuthModel selectAuthModelById(@Param("id") Integer id);
+
+    List<Integer> selectAuthModelByNamePasswordRole(@Param("userName")String userName,@Param("password")String password,@Param("role")Byte role);
 
     int updateAuthModelById(@Param("id") Integer id,@Param("userName")String userName,@Param("password")String password,@Param("role")Byte role);
 

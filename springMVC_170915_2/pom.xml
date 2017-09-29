@@ -1,8 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
-        <artifactId>wjt_train_170622</artifactId>
         <groupId>com.qunar.fresh2017</groupId>
+        <artifactId>com.qunar.fresh2017</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -10,6 +10,8 @@
     <packaging>war</packaging>
     <name>springMVC_170915_2 Maven Webapp</name>
     <url>http://maven.apache.org</url>
+
+
 
     <properties>
         <juit.version>4.12</juit.version>
@@ -29,6 +31,8 @@
         <guava.version>18.0</guava.version>
         <joda.time.version>2.9.9</joda.time.version>
 
+        <httpclient.version>4.5</httpclient.version>
+
         <!--permissions-api,test-->
         <scm-permissions-api>1.4.17</scm-permissions-api>
 
@@ -43,6 +47,19 @@
         </dependency>
 
 
+        <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+<!--        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>${httpclient.version}</version>
+        </dependency>-->
+
+        <!-- https://mvnrepository.com/artifact/commons-httpclient/commons-httpclient -->
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <version>3.1</version>
+        </dependency>
 
 
         <dependency>
@@ -125,6 +142,7 @@
             <artifactId>spring-tx</artifactId>
             <version>${org.springframework.version}</version>
         </dependency>
+
 
         <dependency>
             <groupId>org.springframework</groupId>
@@ -240,6 +258,7 @@
     <build>
         <finalName>springMVC_170915_2</finalName>
     </build>
+
 </project>
 
 

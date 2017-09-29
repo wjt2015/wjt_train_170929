@@ -7,6 +7,13 @@
     <groupId>com.qunar.fresh2017</groupId>
     <artifactId>com.qunar.fresh2017</artifactId>
     <version>1.0-SNAPSHOT</version>
-
+    <packaging>pom</packaging>
+    <modules>
+        <module>springMVC_170915_2</module>
+        <module>springMVC_170915</module>
+        <module>qunar_study_doc</module>
+    </modules>
 
 </project>
+
+

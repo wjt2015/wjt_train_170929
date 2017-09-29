@@ -27,7 +27,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Maven: com.qunar.des.scm:permissions-api:1.4.17" level="project" />
     <orderEntry type="library" name="Maven: com.qunar.ucenter:ucenter-client:3.3.2" level="project" />
-    <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.8" level="project" />
     <orderEntry type="library" name="Maven: qunar.common:common-core:8.2.11" level="project" />
     <orderEntry type="library" name="Maven: qunar.common:common-lang:8.2.11" level="project" />
     <orderEntry type="library" name="Maven: qunar.common:common-concurrent:8.2.11" level="project" />
@@ -112,6 +111,9 @@
     <orderEntry type="library" name="Maven: qunar.tc.qconfig:qconfig-common:1.2.0" level="project" />
     <orderEntry type="library" name="Maven: com.ning:async-http-client:1.9.31" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty:3.9.5.Final" level="project" />
+    <orderEntry type="library" name="Maven: commons-httpclient:commons-httpclient:3.1" level="project" />
+    <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.0.4" level="project" />
+    <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.2" level="project" />
     <orderEntry type="library" name="Maven: joda-time:joda-time:2.9.9" level="project" />
     <orderEntry type="library" name="Maven: com.google.guava:guava:18.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.12" level="project" />
@@ -133,7 +135,6 @@
     <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-core:2.6.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-api:2.6.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-jcl:2.6.2" level="project" />
-    <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-slf4j-impl:2.6.2" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.9" level="project" />
     <orderEntry type="library" name="Maven: org.mybatis:mybatis:3.4.4" level="project" />

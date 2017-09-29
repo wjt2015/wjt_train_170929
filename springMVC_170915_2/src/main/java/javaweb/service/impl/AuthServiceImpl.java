@@ -10,6 +10,7 @@ import javaweb.service.AuthService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author jintao.wang  Date: 17-9-28 Time: 下午2:08
@@ -31,6 +32,13 @@ public class AuthServiceImpl implements AuthService {
     public int deleteAuthModelById(Integer id) {
         Preconditions.checkNotNull(id);
         return authDao.deleteAuthModelById(id);
+    }
+
+    public List<Integer> selectAuthModelByNamePasswordRole(AuthModel authModel) {
+        if(authModel != null && authModel.getUserName() != null && authModel.getPassword() != null && authModel.getRole() != null){
+            return authDao.selectAuthModelByNamePasswordRole(authModel.getUserName(),authModel.getPassword(),authModel.getRole());
+        }
+        return null;
     }
 
     public AuthModel selectAuthModelById(Integer id) {

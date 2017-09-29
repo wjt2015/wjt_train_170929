@@ -8190,6 +8190,13 @@ java web应用的启动过程；
 tomcat感知spring；
 }
 {
+今日问题及解决：
+1、利用chrome观察网络请求的发送和响应的接收，可观察header、cookie;preserve log、clear、清理cookie等浏览记录的方法;
+2、看到每发一个请求，就出现多个请求，这可能是网页内的链接造成的，亦可能是后段代码设计的，可以查看源码；
+怎样找到相关源码呢？根据请求uri在程序文件内查找,例如网页内，或web.xml内，或Controller类内；
+
+}
+{
 idea，浏览位置的回退和前进，快捷键(Alt+F,Alt+B)；
 idea，根据类名查找一个类(ctrl+N)，根据文件名查找一个文件(ctrl+shift+N)，根据一个字符串查找其所在的文件(ctrl+shift+F)，快捷键；
 《研发类面试真题及其解析》;
