@@ -262,7 +262,6 @@ public class AuthFilter implements Filter {
 
         List<String> userInfoList = new LinkedList<String>();
 
-
         if(stringList != null && stringList.size() == 3){
             for (String str:stringList){
                 List<String> strList = Splitter.on('=').omitEmptyStrings().trimResults().splitToList(str);
@@ -273,7 +272,6 @@ public class AuthFilter implements Filter {
         }
         return userInfoList.toArray(new String[]{});
     }
-
 
 }
 
