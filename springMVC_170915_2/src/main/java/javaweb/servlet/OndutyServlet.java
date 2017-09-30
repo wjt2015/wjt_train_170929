@@ -6,10 +6,8 @@ package javaweb.servlet;
 import javaweb.ctx.SingleApplicationContext;
 import javaweb.dao.EmployeeListOndutyDao;
 import javaweb.model.EmployeeListOnduty;
-import javaweb.utils.BridgeUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -35,7 +33,6 @@ public class OndutyServlet extends HttpServlet {
 
     public void init() {
         System.out.println("OndutyServlet.init();start:");
-        System.out.println("employeeListOndutyDao=" + BridgeUtil.getEmployeeListOndutyDao());
         System.out.println("OndutyServlet.init();finish!!");
 
         /* ctx = new ClassPathXmlApplicationContext("spring_context.xml"); */
