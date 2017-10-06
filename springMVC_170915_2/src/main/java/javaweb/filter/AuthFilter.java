@@ -43,7 +43,7 @@ import java.util.List;
 @Slf4j
 public class AuthFilter implements Filter {
 
-    private static final String NAME = "userNamr";
+    private static final String NAME = "userName";
     private static final String PASSWORD = "password";
     private static final String ROLE = "role";
     private static final String SESSIONID = "sessionID";

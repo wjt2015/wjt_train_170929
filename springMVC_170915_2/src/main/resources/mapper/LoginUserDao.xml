@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="javaweb.dao.LoginUserDao">
+
+    <select id="selectLoginUserModelById" >
+        SELECT
+        id as id,
+        user_name as userName,
+        password as password,
+        login_time as loginTime,
+        role as role,
+        is_login as isLogin
+        FROM login_user_table
+        WHERE id = #{id}
+    </select>
+
+    <insert id="insertLoginUserModel">
+        INSERT INTO login_user_table(id,user_name,password,login_time,role,is_login)
+        VALUES (#{loginUserModel.id},#{loginUserModel.userName},#{loginUserModel.password},#{loginUserModel.loginTime},#{loginUserModel.role},#{loginUserModel.isLogin})
+    </insert>
+
+    <update id="updateLoginUserModelById">
+        UPDATE login_user_table
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="loginUserModel.userName != null" >
+                user_name = #{loginUserModel.userName},
+            </if>
+            <if test="loginUserModel.password != null" >
+                password = #{loginUserModel.password},
+            </if>
+            <if test="loginUserModel.loginTime != null" >
+                login_time = #{loginUserModel.loginTime},
+            </if>
+            <if test="loginUserModel.role != null" >
+                role = #{loginUserModel.role}
+            </if>
+            <if test="loginUserModel.isLogin != null" >
+                is_login = #{loginUserModel.isLogin}
+            </if>
+        </trim>
+        WHERE id = #{loginUserModel.id}
+    </update>
+
+
+</mapper>
+
+
+
+
