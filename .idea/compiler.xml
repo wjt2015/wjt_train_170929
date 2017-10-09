@@ -13,7 +13,6 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="com.qunar.fresh2017" target="1.5" />
-      <module name="python_train" target="1.5" />
       <module name="qunar_study_doc" target="1.5" />
       <module name="springMVC_170915" target="1.5" />
       <module name="springMVC_170915_2" target="1.5" />

@@ -33,6 +33,8 @@
 
         <httpclient.version>4.5</httpclient.version>
 
+        <commons-httpclient.version>3.1</commons-httpclient.version>
+
         <!--permissions-api,test-->
         <scm-permissions-api>1.4.17</scm-permissions-api>
 
@@ -58,7 +60,13 @@
         <dependency>
             <groupId>commons-httpclient</groupId>
             <artifactId>commons-httpclient</artifactId>
-            <version>3.1</version>
+            <version>${commons-httpclient.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${org.springframework.version}</version>
         </dependency>
 
 

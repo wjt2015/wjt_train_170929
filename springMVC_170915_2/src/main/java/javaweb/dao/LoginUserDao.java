@@ -15,6 +15,8 @@ public interface LoginUserDao {
 
     LoginUserModel selectLoginUserModelById(@Param("id")Integer id);
 
+    LoginUserModel selectLoginUserModelByNameAndPassword(@Param("userName")String userName,@Param("password")String password);
+
     int updateLoginUserModelById(@Param("loginUserModel") LoginUserModel loginUserModel);
 
     int insertLoginUserModel(@Param("loginUserModel")LoginUserModel loginUserModel);

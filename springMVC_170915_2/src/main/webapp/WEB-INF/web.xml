@@ -154,14 +154,57 @@
         <param-name>contextClass</param-name>
         <param-value>org.springframework.web.context.support.XmlWebApplicationContext</param-value>
     </context-param>-->
+
+    <!--设置spring-->
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:spring_context.xml</param-value>
     </context-param>
     <context-param>
-        <param-name>name</param-name>
-        <param-value>wjt</param-value>
+        <param-name>Domain</param-name>
+        <param-value>qunar.com;qunarman.com</param-value>
     </context-param>
+    <context-param>
+        <param-name>nologinUrl</param-name>
+        <param-value>pages/nologin.html</param-value>
+    </context-param>
+    <context-param>
+        <param-name>noregisterUrl</param-name>
+        <param-value>pages/noregister.html</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <!--登录请求filter-->
+    <filter>
+        <filter-name>loginFilter</filter-name>
+        <filter-class>javaweb.filter.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>loginFilter</filter-name>
+        <url-pattern>*.login</url-pattern>
+    </filter-mapping>
+
+    <!--访问请求的权限检查filter-->
+    <filter>
+        <filter-name>authCheckFilter</filter-name>
+        <filter-class>javaweb.filter.AuthCheckFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>authCheckFilter</filter-name>
+        <url-pattern>*.htm</url-pattern>
+    </filter-mapping>
+
+    <!--注销请求的filter-->
+    <filter>
+        <filter-name>logoutFilter</filter-name>
+        <filter-class>javaweb.filter.LogoutFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>logoutFilter</filter-name>
+        <url-pattern>*.logout</url-pattern>
+    </filter-mapping>
 
 </web-app>
 
