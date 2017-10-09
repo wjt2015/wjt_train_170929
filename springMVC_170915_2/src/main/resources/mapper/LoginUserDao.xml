@@ -5,7 +5,7 @@
 
 <mapper namespace="javaweb.dao.LoginUserDao">
 
-    <select id="selectLoginUserModelById">
+    <select id="selectLoginUserModelById" resultType="javaweb.model.LoginUserModel">
         SELECT
         id as id,
         user_name as userName,
@@ -17,7 +17,7 @@
         WHERE id = #{id}
     </select>
 
-    <select id="selectLoginUserModelByNameAndPassword">
+    <select id="selectLoginUserModelByNameAndPassword" resultType="javaweb.model.LoginUserModel">
         SELECT
         id as id,
         user_name as userName,

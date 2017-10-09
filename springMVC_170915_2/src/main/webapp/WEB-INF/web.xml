@@ -89,7 +89,7 @@
         <url-pattern>*.auth</url-pattern>
     </filter-mapping>
 
-    <filter>
+<!--    <filter>
         <filter-name>loginRequestFilter</filter-name>
         <filter-class>javaweb.filter.LoginRequestFilter</filter-class>
     </filter>
@@ -97,7 +97,7 @@
     <filter-mapping>
         <filter-name>loginRequestFilter</filter-name>
         <url-pattern>*.login</url-pattern>
-    </filter-mapping>
+    </filter-mapping>-->
 
 
 
@@ -146,9 +146,9 @@
 -->
 
     <!--Listener-->
-    <listener>
+<!--    <listener>
         <listener-class>javaweb.listener.MyServletContextListener</listener-class>
-    </listener>
+    </listener>-->
 
 <!--    <context-param>
         <param-name>contextClass</param-name>
@@ -171,6 +171,10 @@
     <context-param>
         <param-name>noregisterUrl</param-name>
         <param-value>pages/noregister.html</param-value>
+    </context-param>
+    <context-param>
+        <param-name>onduty_main_page</param-name>
+        <param-value>pages/onduty_main.html</param-value>
     </context-param>
 
     <listener>
