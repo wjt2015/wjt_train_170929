@@ -6,11 +6,14 @@ package javaweb.filter;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
+import com.qunar.scm.common.result.ApiResult;
+import com.qunar.scm.common.utils.JsonUtil;
 import com.qunar.ucenter.model.api.LoginUser;
 import javaweb.model.LoginUserModel;
 import javaweb.service.LoginUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.bouncycastle.crypto.digests.MD5Digest;
+import org.codehaus.jackson.JsonNode;
 import org.joda.time.DateTime;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -19,6 +22,7 @@ import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
@@ -26,6 +30,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -43,6 +49,8 @@ public class LoginFilter implements Filter {
     private static final String FORWARD_URL = "FORWARD";
 
     private static final String ONDUTY_MAIN_PAGE = "onduty_main_page";
+
+    private static final String ONDUTY_NO_USER_PAGE = "onduty_no_user_page";
 
     private ServletContext servletContext;
 
@@ -67,6 +75,48 @@ public class LoginFilter implements Filter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
 
+        LoginUserModel loginUserModel = parseLoginUserModelFromRequest(httpServletRequest);
+        Byte newLogState = new Byte((byte) 1);
+        loginUserModel.setIsLogin(newLogState);
+        loginUserModel.setLoginTime(new DateTime().getMillis());
+        String userName = loginUserModel.getUserName();
+        String password = loginUserModel.getPassword();
+
+        int iret = loginUserService.updateLoginUserModelByUserNameAndPassword(loginUserModel);
+
+        if (iret == LoginUserService.NO_USER) {
+            /*数据库内没有该用户,说明该用户尚未注册,无权访问*/
+            PrintWriter printWriter = httpServletResponse.getWriter();
+
+            String url = servletContext.getInitParameter(ONDUTY_NO_USER_PAGE);
+            ApiResult<String> apiResult = ApiResult.fail(LoginUserService.NO_USER,"该用户尚未注册", url);
+
+            String resultString = JsonUtil.encode(apiResult);
+            printWriter.write(resultString);
+            return;
+        }
+
+        if (iret >= 1) {
+            /* 成功登录,种植cookie */
+            loginUserModel = loginUserService.selectLoginUserModelByNameAndPassword(userName, password);
+            addCookieUponLogin(httpServletResponse, loginUserModel);
+
+            String forwardUrl = getForwardUrl(httpServletRequest);
+            if (forwardUrl != null) {
+                httpServletResponse.sendRedirect(forwardUrl);
+            } else {
+                httpServletResponse.sendRedirect(servletContext.getInitParameter(ONDUTY_MAIN_PAGE));
+            }
+        }
+
+    }
+
+    public void destroy() {
+
+    }
+
+    private LoginUserModel parseLoginUserModelFromRequest(HttpServletRequest httpServletRequest) throws IOException {
+
         StringBuilder sb = new StringBuilder();
         BufferedReader bufferedReader = httpServletRequest.getReader();
         String strLine = null;
@@ -82,46 +132,14 @@ public class LoginFilter implements Filter {
         String userName = Splitter.on('=').trimResults().omitEmptyStrings().splitToList(stringList.get(0)).get(1);
         String password = Splitter.on('=').trimResults().omitEmptyStrings().splitToList(stringList.get(1)).get(1);
 
-        Byte newLogState = new Byte((byte) 1);
+        LoginUserModel loginUserModel = new LoginUserModel(null, userName, password, null, null, null);
 
-        LoginUserModel loginUserModel = new LoginUserModel(null, userName, password, new DateTime().getMillis(), null,
-                newLogState);
-
-        int iret = loginUserService.updateLoginUserModelByUserNameAndPassword(loginUserModel);
-
-        PrintWriter printWriter = httpServletResponse.getWriter();
-
-        if (iret == LoginUserService.NO_USER) {
-            String contextPath = servletContext.getContextPath();
-            /* httpServletResponse.sendRedirect("./pages/noregister.html"); */
-
-            printWriter.write("1");
-            return;
-
-        }
-
-        if (iret >= 1) {
-            /* 种植cookie */
-            loginUserModel = loginUserService.selectLoginUserModelByNameAndPassword(userName, password);
-            addCookieUponLogin(httpServletResponse, loginUserModel);
-
-            String forwardUrl = getForwardUrl(httpServletRequest);
-            if (forwardUrl != null) {
-                httpServletResponse.sendRedirect(forwardUrl);
-            } else {
-                httpServletResponse.sendRedirect(servletContext.getInitParameter(ONDUTY_MAIN_PAGE));
-            }
-            return;
-        }
-
-    }
-
-    public void destroy() {
-
+        return loginUserModel;
     }
 
     /**
      * 从请求数据中获取用户要达到的目标url
+     * 
      * @param httpServletRequest
      * @return
      */

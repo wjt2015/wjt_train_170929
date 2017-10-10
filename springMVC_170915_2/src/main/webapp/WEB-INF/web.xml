@@ -169,6 +169,10 @@
         <param-value>pages/nologin.html</param-value>
     </context-param>
     <context-param>
+        <param-name>onduty_no_user_page</param-name>
+        <param-value>pages/noregister.html</param-value>
+    </context-param>
+    <context-param>
         <param-name>noregisterUrl</param-name>
         <param-value>pages/noregister.html</param-value>
     </context-param>

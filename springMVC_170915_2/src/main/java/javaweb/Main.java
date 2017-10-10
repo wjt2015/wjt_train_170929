@@ -3,12 +3,15 @@
  */
 package javaweb;
 
+import com.qunar.scm.common.utils.JsonUtil;
+import javaweb.model.LoginUserModel;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -19,7 +22,11 @@ import java.security.NoSuchAlgorithmException;
 public class Main {
 
     public static void main(String[] args){
-        md5();
+        try {
+            jsonFunc();
+        } catch (IOException e) {
+            log.error("IOException happens!!",e);
+        }
     }
     public static void func(){
         HttpServletRequest httpServletRequest = null;
@@ -40,6 +47,15 @@ public class Main {
         messageDigest.update(buff);
         buff = messageDigest.digest();
         System.out.println("\tbuff=" + buff);
+    }
+
+    private static void jsonFunc() throws IOException {
+        LoginUserModel loginUserModel = new LoginUserModel(5,"clinton","xilali",123242L,(byte)1,(byte)1);
+        String userInfo = JsonUtil.encode(loginUserModel);
+        System.out.println("userInfo=" + userInfo);
+        loginUserModel = new LoginUserModel(15,"ABC","xilali",123242L,(byte)1,(byte)1);
+        loginUserModel = JsonUtil.decode(userInfo,LoginUserModel.class);
+        System.out.println("loginUserModel=" + loginUserModel);
     }
 }
     

@@ -15,9 +15,7 @@
         });
 
         function submit() {
-            alert("submit();1");
             var userName = $("#userNameId").val();
-            alert("submit();2");
             var password = $("#passwordId").val();
             var role = $("#roleId").val();
 
@@ -46,8 +44,10 @@
                 contentType: "application/x-www-form-urlencoded;charset=utf-8",
                 async: false,
                 success: function (result) {
-                    if(result != null && result.data != null){
-                        alert(result.data);
+                    alert("result=" + result + ";status=" + result.status + ";data=" + result.data + ";msg=" + result.message);
+                    if(result.status == -1){
+                        /*window.location.href = "http://localhost:8080/springMVC_170915_2_tomcat/" + result.data;*/
+                        window.location.href = "../" + result.data;
                     }
                 }
             });
