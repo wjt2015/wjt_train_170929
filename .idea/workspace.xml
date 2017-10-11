@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f2ca1a8c-d00c-4a12-81db-3a4db00bb2ef" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jsoup_jsoup_1_10_3.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/springMVC_170915_2/src/main/java/javaweb/config/SpringConfig.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/springMVC_170915_2/src/main/webapp/test_pages/mail_href.html" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_pool_commons_pool_1_5_4.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/springMVC_170915_2_war_exploded.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/springMVC_170915_2_war_exploded.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/score_170624/src/main/resources/mysql.properties" afterPath="$PROJECT_DIR$/score_170624/src/main/resources/mysql.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/springMVC_170915_2/pom.xml" afterPath="$PROJECT_DIR$/springMVC_170915_2/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/springMVC_170915_2/springMVC_170915_2.iml" afterPath="$PROJECT_DIR$/springMVC_170915_2/springMVC_170915_2.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/springMVC_170915_2/src/main/java/javaweb/Main.java" afterPath="$PROJECT_DIR$/springMVC_170915_2/src/main/java/javaweb/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/springMVC_170915_2/src/main/webapp/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/springMVC_170915_2/src/main/webapp/WEB-INF/web.xml" />
-    </list>
+    <list default="true" id="f2ca1a8c-d00c-4a12-81db-3a4db00bb2ef" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/springMVC_170915_2/target/" />
     <ignored path="$PROJECT_DIR$/qunar_study_doc/target/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -32,7 +20,7 @@
         <entry file="file://$PROJECT_DIR$/springMVC_170915_2/src/main/java/javaweb/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="220">
-              <caret line="91" column="56" lean-forward="true" selection-start-line="91" selection-start-column="56" selection-end-line="91" selection-end-column="56" />
+              <caret line="91" column="56" lean-forward="false" selection-start-line="91" selection-start-column="56" selection-end-line="91" selection-end-column="56" />
               <folding />
             </state>
           </provider>
@@ -42,7 +30,7 @@
         <entry file="file://$PROJECT_DIR$/score_170624/src/main/resources/mysql.properties">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="140">
-              <caret line="7" column="8" lean-forward="true" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
+              <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -1125,12 +1113,12 @@
       <workItem from="1507450542926" duration="9209000" />
       <workItem from="1507514532607" duration="32602000" />
       <workItem from="1507600478906" duration="25959000" />
-      <workItem from="1507687270979" duration="17832000" />
+      <workItem from="1507687270979" duration="17983000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="86225000" />
+    <option name="totallyTimeSpent" value="86376000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="60" y="-4" width="1860" height="1084" extended-state="6" />
@@ -1157,9 +1145,9 @@
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32983193" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32983193" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32668066" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32668066" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24198896" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -1790,7 +1778,7 @@
     <entry file="file://$PROJECT_DIR$/springMVC_170915_2/src/main/java/javaweb/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
-          <caret line="91" column="56" lean-forward="true" selection-start-line="91" selection-start-column="56" selection-end-line="91" selection-end-column="56" />
+          <caret line="91" column="56" lean-forward="false" selection-start-line="91" selection-start-column="56" selection-end-line="91" selection-end-column="56" />
           <folding />
         </state>
       </provider>
@@ -1798,7 +1786,7 @@
     <entry file="file://$PROJECT_DIR$/score_170624/src/main/resources/mysql.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
-          <caret line="7" column="8" lean-forward="true" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
+          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding />
         </state>
       </provider>
