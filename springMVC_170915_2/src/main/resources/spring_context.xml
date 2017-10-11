@@ -12,6 +12,8 @@
 	   http://www.springframework.org/schema/tx
 	   http://www.springframework.org/schema/tx/spring-tx.xsd">
 
+    <context:component-scan base-package="javaweb.controller" />
+
     <import resource="classpath:spring_mybatis/spring_mybatis.xml"/>
     <import resource="classpath:spring_servlet/springmvc-servlet.xml"/>
     <import resource="classpath:service/spring_service.xml" />

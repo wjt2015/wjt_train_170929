@@ -3,9 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>模块管理</title>
+    <script type="text/javascript" src="../js/logout.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#logoutId").click(function () {
+                logout();
+            });
+        });
+    </script>
+
 </head>
 <body>
 <h1>模块管理</h1>
+<br/>
+<div align="center">
+    <input type="button" id="logoutId" value="logout" align="center">
+</div>
 </body>
 </html>
 

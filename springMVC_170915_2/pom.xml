@@ -35,6 +35,7 @@
 
         <commons-httpclient.version>3.1</commons-httpclient.version>
 
+        <fastjson.version>1.2.39</fastjson.version>
         <!--permissions-api,test-->
         <scm-permissions-api>1.4.17</scm-permissions-api>
 
@@ -46,6 +47,12 @@
             <groupId>com.qunar.des.scm</groupId>
             <artifactId>permissions-api</artifactId>
             <version>${scm-permissions-api}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
         </dependency>
 
 

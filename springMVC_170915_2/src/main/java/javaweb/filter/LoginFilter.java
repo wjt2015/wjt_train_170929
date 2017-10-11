@@ -3,6 +3,7 @@
  */
 package javaweb.filter;
 
+import com.alibaba.fastjson.JSON;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
@@ -11,6 +12,7 @@ import com.qunar.scm.common.utils.JsonUtil;
 import com.qunar.ucenter.model.api.LoginUser;
 import javaweb.model.LoginUserModel;
 import javaweb.service.LoginUserService;
+import javaweb.util.MD5String;
 import lombok.extern.slf4j.Slf4j;
 import org.bouncycastle.crypto.digests.MD5Digest;
 import org.codehaus.jackson.JsonNode;
@@ -28,6 +30,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -43,14 +46,13 @@ import java.util.List;
 @Slf4j
 public class LoginFilter implements Filter {
 
+    private static final String ID = "ID";
+    private static final String USER_INFO = "USER_INFO";
+
     private static final String DOMAIN = "Domain";
     private List<String> domainList;
 
     private static final String FORWARD_URL = "FORWARD";
-
-    private static final String ONDUTY_MAIN_PAGE = "onduty_main_page";
-
-    private static final String ONDUTY_NO_USER_PAGE = "onduty_no_user_page";
 
     private ServletContext servletContext;
 
@@ -83,32 +85,21 @@ public class LoginFilter implements Filter {
         String password = loginUserModel.getPassword();
 
         int iret = loginUserService.updateLoginUserModelByUserNameAndPassword(loginUserModel);
+        PrintWriter printWriter = httpServletResponse.getWriter();
+        ApiResult<String> apiResult = null;
 
         if (iret == LoginUserService.NO_USER) {
-            /*数据库内没有该用户,说明该用户尚未注册,无权访问*/
-            PrintWriter printWriter = httpServletResponse.getWriter();
+            /* 验证不通过,无权访问 */
+            apiResult = ApiResult.fail(LoginUserService.NO_USER, "用户名或密码错误!");
 
-            String url = servletContext.getInitParameter(ONDUTY_NO_USER_PAGE);
-            ApiResult<String> apiResult = ApiResult.fail(LoginUserService.NO_USER,"该用户尚未注册", url);
-
-            String resultString = JsonUtil.encode(apiResult);
-            printWriter.write(resultString);
-            return;
-        }
-
-        if (iret >= 1) {
+        } else if (iret >= 0) {
             /* 成功登录,种植cookie */
-            loginUserModel = loginUserService.selectLoginUserModelByNameAndPassword(userName, password);
             addCookieUponLogin(httpServletResponse, loginUserModel);
-
             String forwardUrl = getForwardUrl(httpServletRequest);
-            if (forwardUrl != null) {
-                httpServletResponse.sendRedirect(forwardUrl);
-            } else {
-                httpServletResponse.sendRedirect(servletContext.getInitParameter(ONDUTY_MAIN_PAGE));
-            }
+            apiResult = ApiResult.succ("您已经成功登录,欢迎您!", forwardUrl);
         }
-
+        String resultString = JSON.toJSONString(apiResult);
+        printWriter.write(resultString);
     }
 
     public void destroy() {
@@ -144,43 +135,15 @@ public class LoginFilter implements Filter {
      * @return
      */
     private String getForwardUrl(HttpServletRequest httpServletRequest) {
-        String forwardUrl = null;
-        Cookie[] cookies = httpServletRequest.getCookies();
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals(FORWARD_URL)) {
-                forwardUrl = cookie.getValue();
-            }
-        }
+        /*
+         * String forwardUrl = null; Cookie[] cookies = httpServletRequest.getCookies(); for (Cookie cookie : cookies) {
+         * if (cookie.getName().equals(FORWARD_URL)) { forwardUrl = cookie.getValue(); } }
+         */
+        HttpSession httpSession = httpServletRequest.getSession();
+        String forwardUrl = (String)httpSession.getAttribute(FORWARD_URL);
+        /*删除这个url，以免干扰后续处理*/
+        httpSession.removeAttribute(FORWARD_URL);
         return forwardUrl;
-    }
-
-    /**
-     * 利用用户名、密码、登录时间戳构造MD5字符串
-     * 
-     * @param userName
-     * @param password
-     * @param loginTime
-     * @return
-     */
-    private String getMD5String(String userName, String password, long loginTime) {
-        Preconditions.checkArgument(Strings.isNullOrEmpty(userName));
-        Preconditions.checkArgument(Strings.isNullOrEmpty(password));
-
-        StringBuilder sb = new StringBuilder();
-        sb.append(userName);
-        sb.append(password);
-        sb.append(loginTime);
-        byte[] srcData = sb.toString().getBytes();
-
-        MessageDigest messageDigest = null;
-        try {
-            messageDigest = MessageDigest.getInstance("MD5");
-        } catch (NoSuchAlgorithmException e) {
-            log.error("NoSuchAlgorithmException", e);
-        }
-        byte[] destData = messageDigest.digest(srcData);
-
-        return new String(destData);
     }
 
     /**
@@ -203,12 +166,12 @@ public class LoginFilter implements Filter {
             Long loginTime = loginUserModel.getLoginTime();
 
             for (String domain : domainList) {
-                Cookie cookie = new Cookie("ID", id.toString());
+                Cookie cookie = new Cookie(ID, id.toString());
                 cookie.setDomain(domain);
                 httpServletResponse.addCookie(cookie);
 
-                String md5 = getMD5String(userName, password, loginTime);
-                cookie = new Cookie("USERINFO", md5);
+                String md5 = MD5String.getMD5String(userName, password, loginTime);
+                cookie = new Cookie(USER_INFO, md5);
                 cookie.setDomain(domain);
                 httpServletResponse.addCookie(cookie);
 

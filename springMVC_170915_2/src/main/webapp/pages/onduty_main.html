@@ -3,14 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <title>值班管理系统</title>
+
+    <script type="text/javascript" src="../springMVC_170915_2_tomcat/jquery/jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="../springMVC_170915_2_tomcat/js/logout.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            $("#submitId").click(function(){
+                alert("before alert()");
+                submit();
+            });
+
+            $("#logoutId").click(function () {
+                logout();
+            });
+        });
+
+        function submit() {
+            var userName = $("#userNameId").val();
+            var password = $("#passwordId").val();
+
+            if(userName == null || userName.length == 0){
+                alert("请输入用户名");
+                return;
+            }
+            if(password == null || password.length == 0){
+                alert("请输入密码");
+                return;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/springMVC_170915_2_tomcat/a.login",
+                data: {
+                    userName:userName,
+                    password:password
+                },
+                dataType: "json",
+                contentType: "application/x-www-form-urlencoded;charset=utf-8",
+                async: false,
+                success: function (result) {
+                    alert("result=" + result + ";status=" + result.status + ";data=" + result.data + ";msg=" + result.message);
+                    $("#msg_id").show();
+                    $("#msg_id").innerHTML = result.message;
+                    if(result.status == -1){
+                        alert(result.data);
+                    }
+                    else if(result.status == 0){
+                        /*成功登录,检查返回的url,并执行跳转*/
+                        if(result.data != null){
+                            window.location.href = result.data;
+                        }
+                    }
+                }
+            });
+
+        }
+
+        function gotoTable() {
+            alert("gotoTable()");
+            $.ajax({
+                type:"GET",
+                url:"http://localhost:8080/springMVC_170915_2_tomcat/pages/onduty_table.htm",
+                async:false,
+                success:function (result) {
+                    if(result.status == 0){
+                        /*已经成功登录了,跳转到功能页面*/
+                        window.location.href="http://localhost:8080/springMVC_170915_2_tomcat/pages/onduty_table.html";
+                    }else if(result.status == -1){
+                        /*登录失败,报错*/
+                        $("#msg_id").show();
+                        $("#msg_id").innerHTML = "您还没有成功登录,无法进入功能页面,请先登录";
+                    }
+                }
+            });
+        }
+
+        function gotoModule() {
+            alert("gotoModule()");
+            $.ajax({
+                type:"GET",
+                url:"http://localhost:8080/springMVC_170915_2_tomcat/pages/onduty_module_management.htm",
+                async:false,
+                success:function (result) {
+                    if(result.status == 0){
+                        /*已经成功登录了,跳转到功能页面*/
+                        window.location.href="http://localhost:8080/springMVC_170915_2_tomcat/pages/onduty_module_management.html";
+                    }else if(result.status == -1){
+                        /*登录失败,报错*/
+                        $("#msg_id").show();
+                        $("#msg_id").innerHTML = "您还没有成功登录,无法进入功能页面,请先登录";
+                    }
+                }
+            });
+        }
+
+        function gotoUpdate() {
+            alert("gotoUpdate()");
+            $.ajax({
+                type:"GET",
+                url:"http://localhost:8080/springMVC_170915_2_tomcat/pages/onduty_update.htm",
+                async:false,
+                success:function (result) {
+                    if(result.status == 0){
+                        /*已经成功登录了,跳转到功能页面*/
+                        window.location.href="http://localhost:8080/springMVC_170915_2_tomcat/pages/onduty_update.html";
+                    }else if(result.status == -1){
+                        /*登录失败,报错*/
+                        $("#msg_id").show();
+                        $("#msg_id").innerHTML = "您还没有成功登录,无法进入功能页面,请先登录";
+                    }
+                }
+            });
+        }
+
+        function hideMsg() {
+            $("#msg_id").hide();
+        }
+
+        
+    </script>
+
 </head>
 <body>
-<div>
-    <h1><p>值班管理系统</p></h1><br/>
-    <a href="onduty_table.html">值班表</a><br/>
-    <a href="onduty_module_management.html">模块管理</a><br/>
-    <a href="onduty_update.html">值班信息更新</a><br/>
+<div align="center">
+    <div align="center">
+        <h1><p>值班管理系统</p></h1>
+        <br/>
+        <a href="#" id="onduty_table_id" onclick="gotoTable()">值班表</a>
+        <a href="#" id="onduty_module_management_id" onclick="gotoModule()">模块管理</a>
+        <a href="#" id="onduty_update_id" onclick="gotoUpdate()">值班信息更新</a>
+    </div>
+    <br/>
+    <div align="center">
+        用户名：<input type="text" name="userName" id="userNameId" maxlength="10" align="left">
+        <br/>
+        密码：<input type="password" name="password" id="passwordId" maxlength="10" align="left">
+        <br/>
+        <br/>
+        <input type="button" id="submitId" value="submit" align="center">
+        <input type="button" id="logoutId" value="logout" align="center">
+        <br/>
+        <br/>
+        <h1 id="msg_id" onload="hideMsg()"></h1>
+        <br/>
+    </div>
 </div>
 
 </body>
 </html>
+
+
+
+
+
+
+
