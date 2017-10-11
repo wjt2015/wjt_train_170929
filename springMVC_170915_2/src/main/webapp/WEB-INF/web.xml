@@ -5,15 +5,43 @@
 
     <display-name>Archetype Created Web Application</display-name>
 
-    <!--    <context-param>
+<!--    <servlet>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextClass</param-name>
+            <param-value>org.springframework.web.context.support.XmlWebApplicationContext</param-value>
+        </init-param>
+        <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>
-                classpath:spring_mybatis/spring_mybatis.xml
-            </param-value>
-        </context-param>
-        <listener>
-            <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-        </listener>-->
+            <param-value>classpath:spring_context.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <url-pattern>*.mvc</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>dispatcherServlet2</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextClass</param-name>
+            <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+        </init-param>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>javaweb.config.SpringConfig</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <url-pattern>*.mvc2</url-pattern>
+    </servlet-mapping>-->
+
+
 
     <servlet>
         <servlet-name>myServlet</servlet-name>
@@ -69,17 +97,6 @@
         <url-pattern>*.f</url-pattern>
     </servlet-mapping>
 
-    <!--filter-->
-
-    <!--    <filter>
-            <filter-name>loginFilter</filter-name>
-            <filter-class>com.qunar.scm.permissions.auth.web.LoginFilter</filter-class>
-        </filter>
-        <filter-mapping>
-            <filter-name>loginFilter</filter-name>
-            <url-pattern>/*</url-pattern>
-        </filter-mapping>-->
-
     <filter>
         <filter-name>authFilter</filter-name>
         <filter-class>javaweb.filter.AuthFilter</filter-class>
@@ -88,17 +105,6 @@
         <filter-name>authFilter</filter-name>
         <url-pattern>*.auth</url-pattern>
     </filter-mapping>
-
-    <!--    <filter>
-            <filter-name>loginRequestFilter</filter-name>
-            <filter-class>javaweb.filter.LoginRequestFilter</filter-class>
-        </filter>
-
-        <filter-mapping>
-            <filter-name>loginRequestFilter</filter-name>
-            <url-pattern>*.login</url-pattern>
-        </filter-mapping>-->
-
 
     <filter>
         <filter-name>myFilter</filter-name>
@@ -128,25 +134,6 @@
     </filter-mapping>
 
 
-
-
-<!--    <servlet>
-        <servlet-name>springmvc</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    &lt;!&ndash; 页面请求 &ndash;&gt;
-    <servlet-mapping>
-        <servlet-name>springmvc</servlet-name>
-        <url-pattern>/*.htm</url-pattern>
-    </servlet-mapping>
-    &lt;!&ndash; 异步请求 &ndash;&gt;
-    <servlet-mapping>
-        <servlet-name>springmvc</servlet-name>
-        <url-pattern>*.json</url-pattern>
-    </servlet-mapping>-->
-
-    <!--字符过滤器-->
     <filter>
         <filter-name>encodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -164,7 +151,7 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-    <!--设置spring-->
+    设置spring
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:spring_context.xml</param-value>

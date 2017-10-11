@@ -36,12 +36,33 @@
         <commons-httpclient.version>3.1</commons-httpclient.version>
 
         <fastjson.version>1.2.39</fastjson.version>
+
+        <jsoup.version>1.10.3</jsoup.version>
+        <jredis.version>2.2.0</jredis.version>
+
         <!--permissions-api,test-->
         <scm-permissions-api>1.4.17</scm-permissions-api>
 
     </properties>
 
     <dependencies>
+        <!--java+redis-->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>${jredis.version}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+
+        <!--爬虫解析-->
+        <dependency>
+            <!-- jsoup HTML parser library @ https://jsoup.org/ -->
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>${jsoup.version}</version>
+        </dependency>
+
         <!--permissions-api,test-->
         <dependency>
             <groupId>com.qunar.des.scm</groupId>

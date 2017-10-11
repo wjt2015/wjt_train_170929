@@ -6,7 +6,21 @@ package javaweb;
 import com.qunar.scm.common.utils.JsonUtil;
 import javaweb.model.LoginUserModel;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.http.client.HttpClient;
 import org.joda.time.DateTime;
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.web.context.support.XmlWebApplicationContext;
+import org.springframework.web.servlet.DispatcherServlet;
+import org.springframework.web.servlet.HandlerAdapter;
+import org.springframework.web.servlet.HandlerMapping;
+import org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import redis.clients.jedis.Jedis;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -22,11 +36,13 @@ import java.security.NoSuchAlgorithmException;
 public class Main {
 
     public static void main(String[] args){
-        try {
-            jsonFunc();
+/*        try {
+           *//* jsonFunc();*//*
+            jsoupTest();
         } catch (IOException e) {
             log.error("IOException happens!!",e);
-        }
+        }*/
+        jedisTest();
     }
     public static void func(){
         HttpServletRequest httpServletRequest = null;
@@ -56,6 +72,49 @@ public class Main {
         loginUserModel = new LoginUserModel(15,"ABC","xilali",123242L,(byte)1,(byte)1);
         loginUserModel = JsonUtil.decode(userInfo,LoginUserModel.class);
         System.out.println("loginUserModel=" + loginUserModel);
+
+
+
+        /**/
+        HandlerMapping handlerMapping;
+        HandlerAdapter handlerAdapter;
+        DispatcherServlet dispatcherServlet;
+        InternalResourceViewResolver internalResourceViewResolver;
+        BeanNameUrlHandlerMapping beanNameUrlHandlerMapping;
+
+        XmlWebApplicationContext xmlWebApplicationContext;
+        AnnotationConfigWebApplicationContext annotationConfigWebApplicationContext;
+
+        Jsoup jsoup;
+        HttpClient httpClient;
+    }
+
+    private static void jsoupTest() throws IOException {
+        String url = "http://www.iteye.com/blogs/subjects";
+        Connection connection = Jsoup.connect(url);
+        Document document = connection.get();
+        Elements elements = document.getElementsByTag("a");
+        for (Element element:elements){
+            String href = element.attr("href");
+            String text = element.text();
+            System.out.println("href=" + href + ";text=" + text);
+        }
+
+    }
+
+    private static void jedisTest(){
+        //连接本地的 Redis 服务
+        Jedis jedis = new Jedis("localhost");
+        System.out.println("连接成功");
+        //查看服务是否运行
+        System.out.println("服务正在运行: "+jedis.ping());
+
+        //设置 redis 字符串数据
+        jedis.set("runoobkey", "www.runoob.com");
+        // 获取存储的数据并输出
+        System.out.println("redis 存储的字符串为: "+ jedis.get("runoobkey"));
+
     }
 }
-    
+
+
