@@ -1,10 +1,11 @@
-STD=
+
 WARN= -Wall
 CFLAGS=-g3 -ggdb3
+DEBUG= -g3 -ggdb3
 
-R_CFLAGS= $(STD) $(WARN) $(OPT) $(DEBUG) $(CFLAGS)
+R_CFLAGS= $(WARN) $(DEBUG) $(CFLAGS)
 R_LDFLAGS= $(LDFLAGS)
-DEBUG= -g
+
 
 R_CC=$(CC) $(R_CFLAGS)
 R_LD=$(CC) $(R_LDFLAGS)

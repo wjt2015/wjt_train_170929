@@ -1,0 +1,13 @@
+async.o: async.c fmacros.h async.h hiredis.h net.h dict.c dict.h sds.h
+dict.o: dict.c fmacros.h dict.h
+example-ae.o: example-ae.c hiredis.h async.h adapters/ae.h \
+ adapters/../hiredis.h adapters/../async.h
+example-libev.o: example-libev.c hiredis.h async.h adapters/libev.h \
+ adapters/../hiredis.h adapters/../async.h
+example-libevent.o: example-libevent.c hiredis.h async.h \
+ adapters/libevent.h adapters/../hiredis.h adapters/../async.h
+example.o: example.c hiredis.h
+hiredis.o: hiredis.c fmacros.h hiredis.h net.h sds.h
+net.o: net.c fmacros.h net.h hiredis.h sds.h
+sds.o: sds.c sds.h
+test.o: test.c fmacros.h hiredis.h

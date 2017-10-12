@@ -8,13 +8,13 @@
 PLAT= none
 
 CC= gcc
-CFLAGS= -O2 -Wall $(MYCFLAGS)
+CFLAGS=-Wall $(MYCFLAGS)
 AR= ar rcu
 RANLIB= ranlib
 RM= rm -f
 LIBS= -lm $(MYLIBS)
 
-MYCFLAGS=
+MYCFLAGS= -g3 -ggdb3
 MYLDFLAGS=
 MYLIBS=
 

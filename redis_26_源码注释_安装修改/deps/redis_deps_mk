@@ -1,0 +1,43 @@
+#redis_deps_mk
+#
+CC=gcc
+MAKE=make
+
+.PHONY:all distclean hiredis linenoise lua
+
+all:hiredis linenoise lua
+
+distclean:
+	-(cd hiredis && $(MAKE) -f hiredis_mk clean)
+	-(cd linenoise && $(MAKE) -f linenoise_mk clean)
+	-(cd lua/src && $(MAKE) -f lua_mk clean)
+
+hiredis:
+	@echo "redis_deps_mk;hiredis"
+	cd hiredis && $(MAKE) -f hiredis_mk static
+
+linenoise:
+	@echo "redis_deps_mk;linenoise"
+	cd linenoise && $(MAKE) -f linenoise_mk
+
+lua:
+	@echo "redis_deps_mk;lua"
+	cd lua/src && $(MAKE) -f lua_mk all
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

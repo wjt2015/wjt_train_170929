@@ -38,7 +38,7 @@ public class LoginUserDaoTest {
     public void insertLoginUserModel() throws Exception {
         Byte role = new Byte((byte)1);
         Byte isLogin = new Byte((byte)0);
-        LoginUserModel loginUserModel = new LoginUserModel(null,"bz.l","iPhoneOK",new DateTime().getMillis(),role,isLogin);
+        LoginUserModel loginUserModel = new LoginUserModel(null,"hz.l","ubuntu",new DateTime().getMillis(),role,isLogin);
         int iret = loginUserDao.insertLoginUserModel(loginUserModel);
         System.out.println("\tiret = " + iret);
     }

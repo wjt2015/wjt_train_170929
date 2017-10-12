@@ -1,0 +1,41 @@
+#hiredis_mk
+#
+.PHONY:all static clean dep
+CC=gcc
+OBJ=net.o hiredis.o sds.o async.o
+LIBNAME=libhiredis
+
+STLIBSUFFIX=a
+
+STLIBNAME=$(LIBNAME).$(STLIBSUFFIX)
+STLIB_MAKE_CMD=ar rcs
+
+
+dep:
+	$(CC) -MM *.c > hiredis_mk_dep
+
+hiredis_mk_dep:dep
+
+include hiredis_mk_dep
+
+%.o:%.c
+	gcc -c -g3 -ggdb3 -rdynamic $^
+
+clean:
+	rm *.o *.a
+
+static:$(STLIBNAME)
+	
+
+$(STLIBNAME):$(OBJ)
+	$(STLIB_MAKE_CMD) $(STLIBNAME) $(OBJ)
+
+	
+
+
+
+
+
+
+
+

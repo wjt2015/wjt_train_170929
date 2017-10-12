@@ -25,6 +25,7 @@ import redis.clients.jedis.Jedis;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -42,7 +43,8 @@ public class Main {
         } catch (IOException e) {
             log.error("IOException happens!!",e);
         }*/
-        jedisTest();
+/*        jedisTest();*/
+        testCookieDomain();
     }
     public static void func(){
         HttpServletRequest httpServletRequest = null;
@@ -87,8 +89,21 @@ public class Main {
 
         Jsoup jsoup;
         HttpClient httpClient;
+        HttpSession httpSession;
+        Cookie cookie;
     }
 
+    private static void testCookieDomain(){
+        String[] requestDomainArr = {"zyday.com","blog.zyday.com","one.blog.zyday.com"};
+        String[] cookieDomainArr = {"","zyday.com","blog.zyday.com","one.blog.zyday.com"};
+        for (String requestDomain:requestDomainArr){
+            System.out.println("\t------;\nrequestDomain=" + requestDomain);
+            for (String cookieDomain:cookieDomainArr){
+                boolean bret = requestDomain.endsWith(cookieDomain);
+                System.out.println("\tcookieDomain=" + cookieDomain + ";bret=" + bret);
+            }
+        }
+    }
     private static void jsoupTest() throws IOException {
         String url = "http://www.iteye.com/blogs/subjects";
         Connection connection = Jsoup.connect(url);

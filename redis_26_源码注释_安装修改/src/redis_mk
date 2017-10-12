@@ -1,0 +1,165 @@
+#redis_mk
+#make -f redis_mk install
+release_hdr := $(shell sh -c `./mkreleasehdr.sh`)
+
+include redis_mk-settings
+
+CC=gcc
+MAKE=make
+DEBUG=-g3 -ggdb3 -rdynamic
+FINAL_CFLAGS=$(DEBUG)
+FINAL_LDFLAGS=$(DEBUG)
+FINAL_LIBS=-lm -lpthread
+
+FINAL_CFLAGS+=-I../deps/hiredis -I../deps/linenoise -I../deps/lua/src
+#FINAL_CFLAGS+=-I../deps/hiredis -I../deps/linenoise
+
+REDIS_CC=$(CC) $(FINAL_CFLAGS)
+REDIS_LD=$(CC) $(FINAL_LDFLAGS)
+REDIS_INSTALL=$(INSTALL)
+
+PREFIX=/home/linux2014/WJT_2016/SOFT_INSTALL/redis26_Install
+INSTALL_BIN=$(PREFIX)/bin
+INSTALL=cp -pf
+
+REDIS_SERVER_NAME=redis-server26
+REDIS_SENTINEL_NAME=redis-sentinel26
+REDIS_SERVER_OBJ= adlist.o ae.o anet.o dict.o redis.o sds.o zmalloc.o lzf_c.o lzf_d.o pqsort.o zipmap.o sha1.o ziplist.o release.o networking.o util.o object.o db.o replication.o rdb.o t_string.o t_list.o t_set.o t_zset.o t_hash.o config.o aof.o pubsub.o multi.o debug.o sort.o intset.o syncio.o cluster.o crc16.o endianconv.o slowlog.o scripting.o bio.o rio.o rand.o memtest.o crc64.o bitops.o sentinel.o
+REDIS_CLI_NAME=redis-cli26
+REDIS_CLI_OBJ=anet.o sds.o adlist.o redis-cli.o zmalloc.o release.o anet.o ae.o crc64.o
+REDIS_BENCHMARK_NAME=redis-benchmark26
+REDIS_BENCHMARK_OBJ= ae.o anet.o redis-benchmark.o sds.o adlist.o zmalloc.o redis-benchmark.o
+REDIS_CHECK_DUMP_NAME=redis-check-dump26
+REDIS_CHECK_DUMP_OBJ=redis-check-dump.o lzf_c.o lzf_d.o crc64.o
+REDIS_CHECK_AOF_NAME=redis-check-aof26
+REDIS_CHECK_AOF_OBJ=redis-check-aof.o
+
+all:redis_dep $(REDIS_SERVER_NAME) $(REDIS_SENTINEL_NAME) $(REDIS_CLI_NAME) $(REDIS_BENCHMARK_NAME) $(REDIS_CHECK_DUMP_NAME) $(REDIS_CHECK_AOF_NAME)
+	@echo "all:$(REDIS_SERVER_NAME) ..."
+	@echo "all__start:"
+	@echo "Hint:To run 'make test' is a good idea!!"
+	@echo "all_end!!"
+redis_dep:
+	cd ../deps && $(MAKE) -f redis_deps_mk all
+.PHONY:all dep redis_dep
+
+dep:
+	echo "src_dep"
+	$(REDIS_CC) -MM *.c > redis_mk.dep
+
+redis_mk.dep:dep
+
+include redis_mk.dep
+
+redis_mk-settings:persist-settings
+
+persist-settings:distclean
+	echo STD=$(STD) >> redis_mk-setttings
+	echo STD=$(STD) >> redis_mk-settings
+	echo WARN=$(WARN) >> redis_mk-settings
+	echo OPT=$(OPT) >> redis_mk-settings
+	echo MALLOC=$(MALLOC) >> redis_mk-settings
+	echo CFLAGS=$(CFLAGS) >> redis_mk-settings
+	echo LDFLAGS=$(LDFLAGS) >> redis_mk-settings
+	echo REDIS_CFLAGS=$(REDIS_CFLAGS) >> redis_mk-settings
+	echo REDIS_LDFLAGS=$(REDIS_LDFLAGS) >> redis_mk-settings
+	echo PREV_FINAL_CFLAGS=$(FINAL_CFLAGS) >> redis_mk-settings
+	echo PREV_FINAL_LDFLAGS=$(FINAL_LDFLAGS) >> redis_mk-settings
+	-(cd ../deps && $(MAKE) $(DEPENDENCY_TARGETS))
+
+.PHONY:persist-settings
+
+
+$(REDIS_SERVER_NAME):$(REDIS_SERVER_OBJ)
+	$(REDIS_LD) -o $@ $^ ../deps/hiredis/libhiredis.a ../deps/lua/src/liblua.a $(FINAL_LIBS)
+
+$(REDIS_SENTINEL_NAME):$(REDIS_SERVER_NAME)
+	$(REDIS_INSTALL) $(REDIS_SERVER_NAME) $(REDIS_SENTINEL_NAME)
+
+$(REDIS_CLI_NAME):$(REDIS_CLI_OBJ)
+	$(REDIS_LD) -o $@ $^ ../deps/hiredis/libhiredis.a ../deps/linenoise/linenoise.o $(FINAL_LIBS)
+
+$(REDIS_BENCHMARK_NAME):$(REDIS_BENCHMARK_OBJ)
+	$(REDIS_LD) -o $@ $^ ../deps/hiredis/libhiredis.a $(FINAL_LIBS)
+
+$(REDIS_CHECK_DUMP_NAME):$(REDIS_CHECK_DUMP_OBJ)
+	$(REDIS_LD) -o $@ $^ $(FINAL_LIBS)
+
+$(REDIS_CHECK_AOF_NAME):$(REDIS_CHECK_AOF_OBJ)
+	$(REDIS_LD) -o $@ $^ $(FINAL_LIBS)
+
+#生成目标文件
+%.o:%.c
+	echo "%.o:%.c"
+	$(REDIS_CC) -c $^
+
+clean:
+	echo "src_clean"
+	rm -rf $(REDIS_SERVER_NAME) $(REDIS_SENTINEL_NAME) $(REDIS_CLI_NAME) $(REDIS_BENCHMARK_NAME) $(REDIS_CHECK_DUMP_NAME) $(REDIS_CHECK_AOF_NAME) %.o
+
+
+.PHONY:clean
+
+
+distclean:clean
+	echo "src_distclean"
+	-(cd ../deps && $(MAKE) -f redis_deps_mk distclean)
+	-(rm -f .make-*)
+
+.PHONY:distclean
+
+test:$(REDIS_SERVER_NAME) $(REDIS_CHECK_AOF_NAME)
+	@(cd ..;./runtest)
+
+bench:$(REDIS_BENCHMARK_NAME)
+	./$(REDIS_BENCHMARK_NAME)
+
+src/help.h:
+	@../utils/generate-command-help.rb > help.h
+
+install:all
+	@echo "install:all"
+	mkdir -p $(INSTALL_BIN)
+	$(REDIS_INSTALL) $(REDIS_SERVER_NAME) $(INSTALL_BIN)
+	$(REDIS_INSTALL) $(REDIS_BENCHMARK_NAME) $(INSTALL_BIN)
+	$(REDIS_INSTALL) $(REDIS_CLI_NAME) $(INSTALL_BIN)
+	$(REDIS_INSTALL) $(REDIS_CHECK_DUMP_NAME) $(INSTALL_BIN)
+	$(REDIS_INSTALL) $(REDIS_CHECK_AOF_NAME) $(INSTALL_BIN)
+
+.PHONY:install
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

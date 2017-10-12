@@ -1,0 +1,2 @@
+example.o: example.c linenoise.h
+linenoise.o: linenoise.c linenoise.h

@@ -1,0 +1,33 @@
+#linenoise_mk
+#
+.PHONY:all static clean deps
+CC=gcc
+OBJ=linenoise.o
+STLIBNAME=liblinenoise.a
+STLIB_MAKE_CMD=ar crs
+
+all:deps static $(OBJ)
+
+deps:
+	$(CC) -MM *.c > linenoise_mk_deps
+
+include linenoise_mk_deps
+linenoise_mk_deps:deps
+ $@ $^
+
+%.o:%.c
+	$(CC) -c -g3 -ggdb3 -rdynamic $^
+
+static:$(STLIBNAME)
+
+$(STLIBNAME):$(OBJ)
+	$(STLIB_MAKE_CMD) $@ $^
+
+clean:
+	rm *.o
+
+
+
+
+
+
