@@ -6,10 +6,13 @@ package javaweb.filter;
 import com.alibaba.fastjson.JSON;
 import javaweb.model.CookieNameValue;
 import javaweb.model.CookieRecord;
+import javaweb.model.InitParameter;
 import javaweb.model.LoginUserModel;
 import javaweb.service.LoginUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.WebApplicationContext;
 
+import javax.annotation.Resource;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -28,6 +31,10 @@ import java.io.PrintWriter;
  */
 public class LogoutFilter implements Filter {
 
+    /*用于存储web.xml文件内配置的参数，如域名列表*/
+
+    private InitParameter initParameter;
+
     private static final String ID = "ID";
     private static final String USER_INFO = "USER_INFO";
 
@@ -37,6 +44,7 @@ public class LogoutFilter implements Filter {
         ServletContext sc = filterConfig.getServletContext();
         WebApplicationContext webApplicationContext = (WebApplicationContext)sc.getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
         loginUserService = webApplicationContext.getBean(LoginUserService.class);
+        initParameter = webApplicationContext.getBean(InitParameter.class);
     }
 
 

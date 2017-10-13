@@ -1,10 +1,11 @@
 /**
  * Copyright (c) 2017 Qunar.com. All Rights Reserved.
  */
-package javaweb.service;
+package javaweb.service.impl;
 
 import javaweb.dao.LoginUserDao;
 import javaweb.model.LoginUserModel;
+import javaweb.service.LoginUserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

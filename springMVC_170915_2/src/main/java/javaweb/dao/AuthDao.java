@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * @author jintao.wang  Date: 17-9-28 Time: 下午1:41
  */
-@Repository
+/*@Repository*/
 public interface AuthDao {
 
     int insertAuthModel(@Param("userName")String userName,@Param("password")String password,@Param("role")Byte role);

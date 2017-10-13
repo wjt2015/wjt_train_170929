@@ -50,15 +50,11 @@ public class AuthCheckFilter implements Filter {
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
         if (checkIsAuthenticated((httpServletRequest))) {
             /* 检验通过,继续后边的处理 */
-            /*chain.doFilter(httpServletRequest, httpServletResponse);*/
+            chain.doFilter(httpServletRequest, httpServletResponse);
 
-            String uri = httpServletRequest.getRequestURI();
+/*            String uri = httpServletRequest.getRequestURI();
             uri += "l";
-            String viewName = uri;
-            ModelAndView mv = new ModelAndView(viewName);
-            String jsonString = JSON.toJSONString(mv);
-            PrintWriter printWriter = httpServletResponse.getWriter();
-            printWriter.write(jsonString);
+            httpServletResponse.sendRedirect("redirect:" + uri);*/
         } else {
             /* 检验不通过,存储该用户刚才请求的url,向前端报错 */
             StringBuffer sb = httpServletRequest.getRequestURL();

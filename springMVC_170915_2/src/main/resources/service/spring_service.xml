@@ -11,7 +11,7 @@
 	   http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <context:component-scan base-package="javaweb.service" />
-    <context:component-scan base-package="javaweb.dao" />
+<!--    <context:component-scan base-package="javaweb.dao" />-->
 
 
 </beans>

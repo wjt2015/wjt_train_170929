@@ -5,24 +5,29 @@
 
     <display-name>Archetype Created Web Application</display-name>
 
-<!--    <servlet>
+    <servlet>
         <servlet-name>dispatcherServlet</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <init-param>
+<!--        <init-param>
             <param-name>contextClass</param-name>
             <param-value>org.springframework.web.context.support.XmlWebApplicationContext</param-value>
         </init-param>
         <init-param>
             <param-name>contextConfigLocation</param-name>
             <param-value>classpath:spring_context.xml</param-value>
+        </init-param>-->
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:spring_servlet/dispatcherServlet-servlet.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>dispatcherServlet</servlet-name>
-        <url-pattern>*.mvc</url-pattern>
+        <url-pattern>*.htm</url-pattern>
     </servlet-mapping>
 
+<!--
     <servlet>
         <servlet-name>dispatcherServlet2</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -39,10 +44,12 @@
     <servlet-mapping>
         <servlet-name>dispatcherServlet</servlet-name>
         <url-pattern>*.mvc2</url-pattern>
-    </servlet-mapping>-->
+    </servlet-mapping>
+-->
 
 
 
+<!--
     <servlet>
         <servlet-name>myServlet</servlet-name>
         <servlet-class>javaweb.servlet.MyServlet</servlet-class>
@@ -53,8 +60,9 @@
         <servlet-name>myServlet</servlet-name>
         <url-pattern>*.htm</url-pattern>
     </servlet-mapping>
+-->
 
-    <servlet>
+<!--    <servlet>
         <servlet-name>ondutyServlet</servlet-name>
         <servlet-class>javaweb.servlet.OndutyServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
@@ -63,18 +71,18 @@
     <servlet-mapping>
         <servlet-name>ondutyServlet</servlet-name>
         <url-pattern>*.onduty</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>-->
 
-    <servlet>
+<!--    <servlet>
         <servlet-name>picServlet</servlet-name>
         <servlet-class>javaweb.servlet.PicHttpServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>picServlet</servlet-name>
         <url-pattern>*.pic</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>-->
 
-    <servlet>
+<!--    <servlet>
         <servlet-name>sessionTracker</servlet-name>
         <servlet-class>javaweb.servlet.SessionTracker</servlet-class>
     </servlet>
@@ -85,28 +93,28 @@
     <servlet-mapping>
         <servlet-name>sessionTracker</servlet-name>
         <url-pattern>*.track</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>-->
 
 
-    <servlet>
+<!--    <servlet>
         <servlet-name>fileUploadServlet</servlet-name>
         <servlet-class>javaweb.servlet.FileUploadServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>fileUploadServlet</servlet-name>
         <url-pattern>*.f</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>-->
 
-    <filter>
+<!--    <filter>
         <filter-name>authFilter</filter-name>
         <filter-class>javaweb.filter.AuthFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>authFilter</filter-name>
         <url-pattern>*.auth</url-pattern>
-    </filter-mapping>
+    </filter-mapping>-->
 
-    <filter>
+<!--    <filter>
         <filter-name>myFilter</filter-name>
         <filter-class>javaweb.filter.MyFilter</filter-class>
         <init-param>
@@ -131,7 +139,7 @@
     <filter-mapping>
         <filter-name>myFilter</filter-name>
         <url-pattern>*.my</url-pattern>
-    </filter-mapping>
+    </filter-mapping>-->
 
 
     <filter>
@@ -151,18 +159,14 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-    设置spring
+<!--    设置spring-->
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:spring_context.xml</param-value>
     </context-param>
     <context-param>
         <param-name>Domain</param-name>
-        <param-value>qunar.com;qunarman.com</param-value>
-    </context-param>
-    <context-param>
-        <param-name>onduty_main_page</param-name>
-        <param-value>pages/onduty_main.html</param-value>
+        <param-value>.qunar.com;.qunarman.com</param-value>
     </context-param>
 
     <listener>

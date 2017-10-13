@@ -7,13 +7,24 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="qunar_study_doc" />
+        <module name="score_170624" />
+        <module name="score_170710" />
+        <module name="springMVC170622" />
+        <module name="springMVC170623" />
+        <module name="springMVC_170726" />
         <module name="springMVC_170915" />
         <module name="springMVC_170915_2" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="com.qunar.fresh2017" target="1.5" />
+      <module name="controller_test" target="1.5" />
       <module name="qunar_study_doc" target="1.5" />
+      <module name="score_170624" target="1.5" />
+      <module name="score_170710" target="1.5" />
+      <module name="springMVC170622" target="1.5" />
+      <module name="springMVC170623" target="1.7" />
+      <module name="springMVC_170726" target="1.5" />
       <module name="springMVC_170915" target="1.5" />
       <module name="springMVC_170915_2" target="1.5" />
     </bytecodeTargetLevel>

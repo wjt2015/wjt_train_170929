@@ -16,9 +16,14 @@ import javax.servlet.http.HttpServletRequest;
  * @author jintao.wang  Date: 17-10-8 Time: 下午9:03
  */
 @Controller
-public class LoginController {
+@RequestMapping(value={"/pages"})
+public class AuthController {
 
-    @RequestMapping(value = {"*.htm"})
+    public AuthController(){
+        System.out.println("!!;public AuthController(),start:");
+        System.out.println("!!;public AuthController(),finish!!");
+    }
+    @RequestMapping(value = {"/onduty_table.htm"})
     public ModelAndView getPage(HttpServletRequest httpServletRequest){
         String uri = httpServletRequest.getRequestURI();
         int length = uri.length();

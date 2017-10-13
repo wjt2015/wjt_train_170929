@@ -10,6 +10,7 @@ import com.google.common.base.Strings;
 import com.qunar.scm.common.result.ApiResult;
 import com.qunar.scm.common.utils.JsonUtil;
 import com.qunar.ucenter.model.api.LoginUser;
+import javaweb.model.InitParameter;
 import javaweb.model.LoginUserModel;
 import javaweb.service.LoginUserService;
 import javaweb.util.MD5String;
@@ -17,8 +18,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.bouncycastle.crypto.digests.MD5Digest;
 import org.codehaus.jackson.JsonNode;
 import org.joda.time.DateTime;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.WebApplicationContext;
 
+import javax.annotation.Resource;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -45,6 +48,8 @@ import java.util.List;
  */
 @Slf4j
 public class LoginFilter implements Filter {
+    /*用于存储web.xml文件内配置的参数，如域名列表*/
+    private InitParameter initParameter;
 
     private static final String ID = "ID";
     private static final String USER_INFO = "USER_INFO";
@@ -70,6 +75,8 @@ public class LoginFilter implements Filter {
         if (domainStr != null) {
             domainList = Splitter.on(';').trimResults().omitEmptyStrings().splitToList(domainStr);
         }
+        initParameter = webApplicationContext.getBean(InitParameter.class);
+        initParameter.copyDomainList(domainList);
     }
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -93,6 +100,7 @@ public class LoginFilter implements Filter {
             apiResult = ApiResult.fail(LoginUserService.NO_USER, "用户名或密码错误!");
 
         } else if (iret >= 0) {
+            loginUserModel = loginUserService.selectLoginUserModelByNameAndPassword(userName,password);
             /* 成功登录,种植cookie */
             addCookieUponLogin(httpServletResponse, loginUserModel);
             String forwardUrl = getForwardUrl(httpServletRequest);
@@ -117,8 +125,6 @@ public class LoginFilter implements Filter {
         }
         String userInfo = sb.toString();
         /* 利用报文实体内的字符流解析出用户名和密码 */
-        httpServletRequest.getParameter("");
-        httpServletRequest.getParameter("");
         List<String> stringList = Splitter.on('&').trimResults().omitEmptyStrings().splitToList(userInfo);
         String userName = Splitter.on('=').trimResults().omitEmptyStrings().splitToList(stringList.get(0)).get(1);
         String password = Splitter.on('=').trimResults().omitEmptyStrings().splitToList(stringList.get(1)).get(1);
@@ -165,20 +171,23 @@ public class LoginFilter implements Filter {
             String password = loginUserModel.getPassword();
             Long loginTime = loginUserModel.getLoginTime();
 
-            for (String domain : domainList) {
+            /*for (String domain : domainList) {*/
                 Cookie cookie = new Cookie(ID, id.toString());
-                cookie.setDomain(domain);
+                /*cookie.setDomain(domain);*/
                 httpServletResponse.addCookie(cookie);
 
                 String md5 = MD5String.getMD5String(userName, password, loginTime);
                 cookie = new Cookie(USER_INFO, md5);
-                cookie.setDomain(domain);
+                /*cookie.setDomain(domain);*/
                 httpServletResponse.addCookie(cookie);
 
                 nCookie += 2;
-            }
+           /* }*/
         }
         return nCookie;
     }
 
 }
+
+
+

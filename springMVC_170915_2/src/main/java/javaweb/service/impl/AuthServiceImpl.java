@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * @author jintao.wang  Date: 17-9-28 Time: 下午2:08
  */
-@Service
+/*@Service*/
 public class AuthServiceImpl implements AuthService {
     @Resource
     private AuthDao authDao;

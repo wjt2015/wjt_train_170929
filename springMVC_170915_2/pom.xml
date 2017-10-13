@@ -37,6 +37,7 @@
 
         <fastjson.version>1.2.39</fastjson.version>
 
+        <jackson-core.version>2.8.10</jackson-core.version>
         <jsoup.version>1.10.3</jsoup.version>
         <jredis.version>2.2.0</jredis.version>
 
@@ -46,6 +47,15 @@
     </properties>
 
     <dependencies>
+
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson-core.version}</version>
+        </dependency>
+
+
         <!--java+redis-->
         <dependency>
             <groupId>redis.clients</groupId>
