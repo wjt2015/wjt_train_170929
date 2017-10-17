@@ -16,9 +16,11 @@ public class HelloController {
     @RequestMapping(value = {"/getMsg"})
     public ModelAndView helloPage(){
         ModelAndView mv = new ModelAndView("index");
+        System.out.println("mv=" + mv);
         return mv;
     }
 }
  /*
  * /myServlet/getMsg.htm
  * */
+

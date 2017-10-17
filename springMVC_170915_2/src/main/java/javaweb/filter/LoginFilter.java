@@ -171,18 +171,18 @@ public class LoginFilter implements Filter {
             String password = loginUserModel.getPassword();
             Long loginTime = loginUserModel.getLoginTime();
 
-            /*for (String domain : domainList) {*/
+            for (String domain : domainList) {
                 Cookie cookie = new Cookie(ID, id.toString());
-                /*cookie.setDomain(domain);*/
+                cookie.setDomain(domain);
                 httpServletResponse.addCookie(cookie);
 
                 String md5 = MD5String.getMD5String(userName, password, loginTime);
                 cookie = new Cookie(USER_INFO, md5);
-                /*cookie.setDomain(domain);*/
+                cookie.setDomain(domain);
                 httpServletResponse.addCookie(cookie);
 
                 nCookie += 2;
-           /* }*/
+            }
         }
         return nCookie;
     }

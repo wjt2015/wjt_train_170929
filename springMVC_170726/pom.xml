@@ -25,6 +25,7 @@
         <servlet-api.version>2.5</servlet-api.version>
         <spring-web.version>4.3.0.RELEASE</spring-web.version>
         <spring-webmvc.version>1.2.6</spring-webmvc.version>
+        <spring-test.version>4.2.5.RELEASE</spring-test.version>
     </properties>
 
     <dependencies>
@@ -32,6 +33,13 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring-test.version}</version>
             <scope>test</scope>
         </dependency>
 

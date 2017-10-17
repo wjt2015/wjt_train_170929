@@ -13,9 +13,10 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class InfoController {
 
-    @RequestMapping(value = {"/a.htm"})
+    @RequestMapping(value = {"/a"})
     public ModelAndView getModelAndView(){
         ModelAndView mv = new ModelAndView("a");
+        System.out.println("mv=" + mv);
         return mv;
     }
 }

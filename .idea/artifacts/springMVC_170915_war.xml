@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="springMVC_170915:war">
-    <output-path>$PROJECT_DIR$/springMVC_170915/target</output-path>
-    <root id="archive" name="springMVC_170915.war">
-      <element id="artifact" artifact-name="springMVC_170915:war exploded" />
-    </root>
-  </artifact>
-</component>
