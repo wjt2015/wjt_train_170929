@@ -1,6 +1,7 @@
 package javaweb.dao;
 
 import javaweb.model.LoginUserModel;
+import org.apache.ibatis.type.JdbcType;
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,12 +36,21 @@ public class LoginUserDaoTest {
     }
 
     @Test
-    public void insertLoginUserModel() throws Exception {
+    public void testLoginUserDao() throws Exception {
         Byte role = new Byte((byte)1);
         Byte isLogin = new Byte((byte)0);
-        LoginUserModel loginUserModel = new LoginUserModel(null,"zs.s","revolution",new DateTime().getMillis(),role,isLogin);
+        LoginUserModel loginUserModel = new LoginUserModel(null,"李自成","明末农民军领袖",new DateTime().getMillis(),role,isLogin);
         int iret = loginUserDao.insertLoginUserModel(loginUserModel);
         System.out.println("\tiret = " + iret);
+
+        Integer id = 6;
+        loginUserModel = loginUserDao.selectLoginUserModelById(id);
+        System.out.println("id =" + id + ";loginUserModel=" + loginUserModel);
+        id = 7;
+        loginUserModel = loginUserDao.selectLoginUserModelById(id);
+        System.out.println("id =" + id + ";loginUserModel=" + loginUserModel);
+
+        JdbcType jdbcType;
     }
 
 }

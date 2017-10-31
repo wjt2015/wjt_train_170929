@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2017 Qunar.com. All Rights Reserved.
  */
-package javaweb;
+package javaweb.main;
 
 import com.qunar.scm.common.utils.JsonUtil;
 import javaweb.model.LoginUserModel;
